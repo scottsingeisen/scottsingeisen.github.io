@@ -113,7 +113,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-    # _portfolio
+  # _portfolio
   - scope:
       path: ""
       type: portfolio
@@ -121,6 +121,18 @@ defaults:
       layout: single
       author_profile: false
       share: true
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+
 
 
 category_archive:
