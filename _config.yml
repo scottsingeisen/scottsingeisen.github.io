@@ -62,7 +62,9 @@ plugins:
 author:
   name   : "Scott Singeisen"
   avatar : "/assets/images/bio-photo.jpg"
-  bio    : "My awesome biography constrained to a sentence or two goes here."
+  bio    : "Associate Professor of Architecture, NCCU.
+            Duke Digital Humanities Fellow.
+            Disciplinary Flaneur."
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
