@@ -1,6 +1,8 @@
 main:
   - title: "Writings"
     url: /writings/
+  - title: "Creative"
+    url: /creative/
   - title: "Categories"
     url: /categories/
   - title: "Tags"
