@@ -95,10 +95,10 @@ footer:
       url: "https://bsky.app/profile/scottsingeisen.bsky.social"
 
 defaults:
-  # _posts
+  # _writings
   - scope:
       path: ""
-      type: posts
+      type: writings
     values:
       layout: single
       author_profile: true
