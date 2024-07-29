@@ -97,7 +97,7 @@ footer:
 defaults:
   # _writings
   - scope:
-      path: "/writings/"
+      path: "_writings"
       type: writings
     values:
       layout: single
@@ -113,6 +113,17 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _creative
+  - scope:
+      path: "_creative"
+      type: creative
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
 
 category_archive:
   type: liquid
