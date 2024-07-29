@@ -66,10 +66,7 @@ author:
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      url: "https://"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/"
+      url: "https://scottsingeisen.github.io/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/"
@@ -91,6 +88,9 @@ footer:
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/scottsingeisen"
+    - label: "BlueSky"
+      icon: "fab fa-fw fa-bluesky"
+      url: "https://bsky.app/profile/scottsingeisen.bsky.social"
 
 defaults:
   # _posts
