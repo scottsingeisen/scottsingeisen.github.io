@@ -97,7 +97,7 @@ footer:
 defaults:
   # _writings
   - scope:
-      path: ""
+      path: "/writings/"
       type: writings
     values:
       layout: single
