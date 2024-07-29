@@ -97,7 +97,7 @@ footer:
 defaults:
   # _writings
   - scope:
-      path: "_writings"
+      path: ""
       type: writings
     values:
       layout: single
@@ -108,14 +108,14 @@ defaults:
       related: true
   # _pages
   - scope:
-      path: "_pages"
+      path: ""
       type: pages
     values:
       layout: single
       author_profile: true
   # _creative
   - scope:
-      path: "_creative"
+      path: ""
       type: creative
     values:
       layout: single
