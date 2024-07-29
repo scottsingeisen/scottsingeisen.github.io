@@ -113,18 +113,7 @@ defaults:
     values:
       layout: single
       author_profile: true
-  # _creative
-  - scope:
-      path: ""
-      type: creative
-    values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: true
-      share: true
-      related: true
-  # _portfolio
+    # _portfolio
   - scope:
       path: ""
       type: portfolio
