@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>NOMA</a>.
+subtitle: M.Arch, BFA, <a href='#'>NOMA</a>.
 
 profile:
   align: right
