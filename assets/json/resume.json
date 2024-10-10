@@ -1,36 +1,39 @@
 {
   "basics": {
-    "name": "Albert Einstein",
-    "label": "Scientist",
+    "name": "Scott Singeisen",
+    "label": "Professor",
     "image": "",
-    "email": "albert@einstein.de",
-    "phone": "(912) 123-4567",
-    "url": "https://alshedivat.github.io/al-folio/",
-    "summary": "A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time",
+    "email": "ssingeis@nccu.edu",
+    "phone": "(912) 257-9702",
+    "url": "https://scottsingeisen.github.io",
+    "summary": "Scott Singeisen is an Associate Professor of Architecture at North Carolina Central University and a Duke University Digital Humanities Fellow. Before joining NCCU, Singeisen taught at the Savannah College of Art and Design for twenty years and was Chair of the Architecture Department from 2007-2012. Singeisen’s teaching concentrated on graduate and undergraduate design studios focusing on the design process, communication, and representation. Singeisen’s academic work has been presented at conferences including the 7th International Workshop on Social Intelligence Design, the 16th Annual US/ICOMOS Scientific Symposium; international, national, and regional venues of the Association of Collegiate Schools of Architecture; the National Conference on the Beginning Design Student; and has been featured in multiple media outlets including USA Today and Design Intelligence.
+
+Before joining the SCAD faculty, Singeisen practiced in Sarasota and Orlando Florida where he received multiple awards for design and preservation projects throughout the region and served as a visiting design critic at major public universities. He continues to practice by engaging in smaller-scale projects on his own.
+",
     "location": {
-      "address": "2712 Broadway St",
-      "postalCode": "CA 94115",
-      "city": "San Francisco",
+      "address": "1800 Fayetteville St",
+      "postalCode": "NC 27707",
+      "city": "Durham",
       "countryCode": "US",
-      "region": "California"
+      "region": "North Carolina"
     },
     "profiles": [
       {
-        "network": "Twitter",
-        "username": "AlbertEinstein",
-        "url": "https://twitter.com/AlbertEinstein"
+        "network": "BlueSky",
+        "username": "scottsingeisen.bsky.social",
+        "url": "https://bsky.app/profile/scottsingeisen.bsky.social"
       }
     ]
   },
   "work": [
     {
-      "name": "Institute for Advanced Study, Princeton University",
-      "position": "Professor of Theoretical Physics",
+      "name": "North Carolina Central University",
+      "position": "Assocaite Professor of Architecture",
       "url": "https://example.com",
-      "startDate": "1933-01-01",
-      "endDate": "1955-01-01",
-      "summary": "Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
-      "highlights": ["Relativity"]
+      "startDate": "2023-07-01",
+      "endDate": #"1955-01-01",
+      "summary": #"Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.",
+      "highlights": #["Relativity"]
     }
   ],
   "volunteer": [
