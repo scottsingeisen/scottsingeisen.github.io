@@ -316,7 +316,7 @@ scholar:
   last_name: [Singeisen]
   first_name: [Scott, R.]
 
-  style: chicago-fullnote-bibliography
+  style: apa
   locale: en
 
   source: /_bibliography/
