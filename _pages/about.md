@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: M.Arch, BFA, <a href='noma.net'>NOMA</a>.
 
 profile:
   align: right
