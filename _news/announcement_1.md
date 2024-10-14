@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Singeisen has been apointed to the City of Durham Historic Preservation Commission.
+Singeisen has been apointed to the City of Durham, NC Historic Preservation Commission for a term of three years, expiring on September 1, 2027.
