@@ -36,7 +36,9 @@ in some instances are entirely absent from exterior facades. Among these structu
 Shepard Administration Building, Alexander Dunn Hall, Annie Day Shepard Hall, and five institutional
 buildings erected in the late 1930s under the Public Works Administration's auspices. Recognition of the
 campus's historical significance culminated in its inclusion on the National Register of Historic Places in
-1986. During the course development – as well as when offered – an important resource for the faculty
+1986. 
+
+> During the course development – as well as when offered – an important resource for the faculty
 and students will be Mr. André Vann, coordinator of university archives. The university archives contain
 a rich variety of documentary, photographic, and historic materials that will prove invaluable.
 
