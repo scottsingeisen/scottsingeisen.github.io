@@ -51,7 +51,7 @@ them. The intent is to foster recognition of the inherent value of this shared i
 environment, whether the student’s campus or their hometown.
 
 The Digital Eagles Nest can also capture important historical social activities as an additional layer of
-information and data. Similar to the <a href= https://www.urbanarchive.nyc/>Urban Archive</a>, visitors to the future Digital Eagles Nest may find
+information and data. Similar to the <a href="https://www.urbanarchive.nyc"/>Urban Archive</a>, visitors to the future Digital Eagles Nest may find
 themselves checking in daily to discover a social happening from that day in history, potentially learn
 about a historical on-campus moment such as ‘The Secret Game’ in 1944, or reflect on a geo-located
 photo of the Homecoming Court from the university archives.
