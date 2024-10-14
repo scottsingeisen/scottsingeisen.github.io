@@ -21,7 +21,7 @@ institutional narratives. As an additional benefit, the course will further broa
 nascent architecture program created in the fall of 2023 both within the institution and beyond.
 
 Akin to similarly successful DH projects which document historic architecture, campuses, and cities of
-cultural and social importance such as <a href=https://buildingsouthbend.nd.edu>Building South Bend</a> and <a href=http://paris.cdh.ucla.edu>Paris: Past and Present</a>, The Digital
+cultural and social importance such as <a href="https://buildingsouthbend.nd.edu">Building South Bend</a> and <a href="http://paris.cdh.ucla.edu">Paris: Past and Present</a>, The Digital
 Eagles Nest will engage architectural humanities questions such as: Why is architecture essential to
 human society, and what does architecture reflect about that society? How do individuals interact with the
 space around them? What is the importance of the architectural campus to an HBCU? And how do we
@@ -35,8 +35,7 @@ features, typically drawing inspiration from the classical tradition, are often 
 in some instances are entirely absent from exterior facades. Among these structures are the James E.
 Shepard Administration Building, Alexander Dunn Hall, Annie Day Shepard Hall, and five institutional
 buildings erected in the late 1930s under the Public Works Administration's auspices. Recognition of the
-campus's historical significance culminated in its inclusion on the National Register of Historic Places in
-1986. 
+campus's historical significance culminated in its inclusion on the National Register of Historic Places.
 
 > During the course development – as well as when offered – an important resource for the faculty
 and students will be Mr. André Vann, coordinator of university archives. The university archives contain
