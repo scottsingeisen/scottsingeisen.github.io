@@ -21,7 +21,7 @@ institutional narratives. As an additional benefit, the course will further broa
 nascent architecture program created in the fall of 2023 both within the institution and beyond.
 
 Akin to similarly successful DH projects which document historic architecture, campuses, and cities of
-cultural and social importance such as <a href= https://buildingsouthbend.nd.edu/>Building South Bend</a> and <a href= http://paris.cdh.ucla.edu/>Paris: Past and Present</a>, The Digital
+cultural and social importance such as <a href=https://buildingsouthbend.nd.edu/>Building South Bend</a> and <a href=http://paris.cdh.ucla.edu/>Paris: Past and Present</a>, The Digital
 Eagles Nest will engage architectural humanities questions such as: Why is architecture essential to
 human society, and what does architecture reflect about that society? How do individuals interact with the
 space around them? What is the importance of the architectural campus to an HBCU? And how do we
