@@ -6,7 +6,7 @@ inline: false
 related_posts: false
 ---
 
-Prof. Singeisen has been awarded the NCCU-Duke University Digital Humanities Course Development Fellowship. Sponsored by the Mellon Humanities Unbounded initiative at Duke University.
+<a href="https://humanitiesunbounded.duke.edu/scott-singeisen">Prof. Singeisen</a> has been awarded the NCCU-Duke University Digital Humanities Course Development Fellowship. Sponsored by the Mellon Humanities Unbounded initiative at Duke University.
 
 ---
 _from the proposal..._

@@ -17,4 +17,4 @@ The establishment of this group aligns with our university's commitment to acade
 #### Professional Development Committee
 The working group will facilitate learning and knowledge-sharing events, workshops, and seminars. These activities aim to keep faculty, staff, and students abreast of the latest developments in AI, enhancing their professional skills and understanding of this critical field.
 
-> Read more about the initiative and see all of the working group members <a href ='https://www.nccu.edu/academics/nccu-ai-working-group'>here</a>
+> Read more about the initiative and see all of the working group members <a href="https://www.nccu.edu/academics/nccu-ai-working-group">here</a>
