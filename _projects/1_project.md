@@ -2,7 +2,7 @@
 layout: page
 title: project 1
 description: with background image
-img: assets/img/Imran 00001.jpg
+img: assets/img/Imran00001.jpg
 importance: 1
 category: academic
 related_publications: true
