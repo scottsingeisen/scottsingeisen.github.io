@@ -5,7 +5,7 @@ title: cv
 nav: true
 nav_order: 5
 cv_pdf: 01 Scott Singeisen_CV.pdf
-description: This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
+description: A full CV is available to download above. A condensed version appears below.
 toc:
   sidebar: left
 ---
