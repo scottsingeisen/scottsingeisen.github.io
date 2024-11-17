@@ -1,4 +1,5 @@
 {
+  "basics": {
     "name": "Scott Singeisen",
     "contact": {
       "email": "ssingeis@nccu.edu",
@@ -6,7 +7,6 @@
       "position": "Associate Professor of Architecture",
       "department": "Department of Art & Design"
     },
-    "background": "Scott Singeisen is an Associate Professor of Architecture at NCCU and a Duke University Digital Humanities Fellow. Formerly a professor at SCAD for twenty years, focusing on design studios and representation.",
     "academic_positions": [
       {
         "role": "Associate Professor of Architecture",
@@ -168,4 +168,4 @@
       }
     ]
   }
-  
+}
