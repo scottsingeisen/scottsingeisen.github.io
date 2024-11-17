@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Scott Singeisen",
-    "contact": 
+    "contact": {
       "email": "ssingeis@nccu.edu",
       "institution": "North Carolina Central University",
       "position": "Associate Professor of Architecture",
