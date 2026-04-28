@@ -188,13 +188,7 @@
       "name": "Digital & Computational",
       "level": "Proficient",
       "icon": "fa-solid fa-computer",
-      "keywords": [
-        "Python",
-        "Blender",
-        "Rhino & Grasshopper",
-        "3D Scanning / Photogrammetry",
-        "BIM"
-      ]
+      "keywords": ["Python", "Blender", "Rhino & Grasshopper", "3D Scanning / Photogrammetry", "BIM"]
     }
   ],
   "interests": [

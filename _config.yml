@@ -2,15 +2,9 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-<<<<<<< HEAD
 title: S. Singeisen # the website title (if blank, full name will be used instead)
 first_name: Scott
 middle_name: R.
-=======
-title: blank # the website title (if blank, full name will be used instead)
-first_name: Scott
-middle_name:
->>>>>>> 3f0da29 (Update site with accurate CV, publications, and bio)
 last_name: Singeisen
 email: ssingeis@nccu.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
@@ -319,11 +313,7 @@ display_categories: ["external-services"] # these categories will be displayed o
 
 scholar:
   last_name: [Singeisen]
-<<<<<<< HEAD
-  first_name: [Scott]
-=======
   first_name: [Scott, S.]
->>>>>>> 3f0da29 (Update site with accurate CV, publications, and bio)
 
   style: apa
   locale: en

@@ -9,8 +9,11 @@ related_posts: false
 <a href="https://humanitiesunbounded.duke.edu/scott-singeisen">Prof. Singeisen</a> has been awarded the NCCU-Duke University Digital Humanities Course Development Fellowship. Sponsored by the Mellon Humanities Unbounded initiative at Duke University.
 
 ---
+
 _from the proposal..._
+
 #### The Digital Eagles Nest
+
 The Mellon fellowship will support the research and development of a new Digital Humanities (DH)
 course for the NCCU DH minor that will additionally serve as an elective to all interested students from
 the NCCU cohort. The envisioned course will blend architectural, cultural, and social histories in a crossdisciplinary
@@ -38,8 +41,8 @@ buildings erected in the late 1930s under the Public Works Administration's ausp
 campus's historical significance culminated in its inclusion on the National Register of Historic Places.
 
 > During the course development – as well as when offered – an important resource for the faculty
-and students will be Mr. André Vann, coordinator of university archives. The university archives contain
-a rich variety of documentary, photographic, and historic materials that will prove invaluable.
+> and students will be Mr. André Vann, coordinator of university archives. The university archives contain
+> a rich variety of documentary, photographic, and historic materials that will prove invaluable.
 
 While the architectural history of NCCU is already special, the culture of campus is also important given
 that the university is an HBCU. Cultural heritage encompasses the tangible and intangible legacies
