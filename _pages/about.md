@@ -2,12 +2,12 @@
 layout: about
 title: about
 permalink: /
-subtitle: BFA, M.Arch, <a href=https://noma.net>NOMA</a>.
+subtitle: Associate Professor of Architecture, <a href="https://www.nccu.edu">North Carolina Central University</a>
 
 profile:
   align: right
   image: prof_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: false
   more_info: >
     <p>912-257-9702</p>
     <p>Fine Arts Building, room 110</p>
@@ -19,6 +19,10 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Scott Singeisen is an Associate Professor of Architecture at North Carolina Central University and a Duke University Digital Humanities Fellow. Before joining NCCU, Singeisen taught at the Savannah College of Art and Design for twenty years and was Chair of the Architecture Department from 2007-2012. Singeisen’s teaching concentrated on graduate and undergraduate design studios focusing on the design process, communication, and representation. Singeisen’s academic work has been presented at conferences including the 7th International Workshop on Social Intelligence Design, the 16th Annual US/ICOMOS Scientific Symposium; international, national, and regional venues of the Association of Collegiate Schools of Architecture; the National Conference on the Beginning Design Student; and has been featured in multiple media outlets including USA Today and Design Intelligence.
+I am Associate Professor of Architecture in the Department of Art & Design at North Carolina Central University, where I serve as the founding architect of NCCU's Pre-Architecture Concentration — the first pre-architecture program established at an HBCU in North Carolina.
 
-Before joining the SCAD faculty, Singeisen practiced in Sarasota and Orlando Florida where he received multiple awards for design and preservation projects throughout the region and served as a visiting design critic at major public universities. He continues to practice by engaging in smaller-scale projects on his own.
+In 2024 I founded the [Eyrie Initiative Community Design Center](https://www.nccu.edu), the first community design center at an HBCU in North Carolina, which I direct alongside my teaching. The Eyrie Initiative advances community-engaged design research and practice in Durham and the surrounding region, including a multi-partner corridor study and urban design effort along Fayetteville Street and the Hayti Heritage District.
+
+My research moves across three areas: the history and theory of architectural image production (specifically the role of fine art printmaking in shaping public perception of American architecture); beginning design pedagogy; and digital humanities applied to historically significant built environments. I am also a contributing member of the CLOUD Collaborative, a practice-based research group using computational tools — Python, Blender, and the Alembic standard — to explore atmospheric form and representation.
+
+Before coming to NCCU I spent nearly two decades at the Savannah College of Art and Design, where I taught architecture and urban design at every level of the curriculum, chaired the Department of Architecture (2007–2012), and coordinated the M.Arch program (2016–2023). I hold an M.Arch and B.F.A. in Architecture, both from SCAD, and hold an NCARB record.

@@ -1,6 +1,7 @@
 {
   "basics": {
     "name": "Scott Singeisen",
+<<<<<<< HEAD
     "contact": {
       "email": "ssingeis@nccu.edu",
       "institution": "North Carolina Central University",
@@ -168,4 +169,240 @@
       }
     ]
   }
+=======
+    "label": "Associate Professor of Architecture",
+    "image": "",
+    "email": "ssingeis@nccu.edu",
+    "url": "https://scottsingeisen.github.io",
+    "summary": "Associate Professor of Architecture at North Carolina Central University, founder of the Eyrie Initiative Community Design Center — the first community design center at an HBCU in North Carolina — and architect with research interests spanning community-engaged design, architectural pedagogy, the intersection of fine art printmaking and architectural image production, and digital humanities.",
+    "location": {
+      "city": "Durham",
+      "countryCode": "US",
+      "region": "North Carolina"
+    },
+    "profiles": []
+  },
+  "work": [
+    {
+      "name": "North Carolina Central University, Department of Art & Design",
+      "position": "Associate Professor of Architecture",
+      "startDate": "2023-01-01",
+      "endDate": "",
+      "summary": "Inaugural professor of architecture at NCCU, focusing on teaching, curriculum development, student recruitment, and building the first pre-architecture program at an HBCU in North Carolina.",
+      "highlights": [
+        "Founder, Eyrie Initiative Community Design Center (2024–present) — first community design center at an HBCU in North Carolina",
+        "Coordinator, Pre-Architecture Concentration (2023–present) — first pre-architecture program at an HBCU in North Carolina",
+        "Developed B.Arch degree proposal for UNC System Board of Governors (2024–present)"
+      ]
+    },
+    {
+      "name": "Savannah College of Art and Design, Department of Architecture",
+      "position": "Professor of Architecture & Urban Design",
+      "startDate": "2004-01-01",
+      "endDate": "2023-01-01",
+      "summary": "Teaching across all studio levels of the curriculum, with focused work in undergraduate and graduate architecture studios, architectural representation, graphics for the building arts, and beginning design.",
+      "highlights": [
+        "Department Chair (2007–2012) — led nationally recognized NAAB-accredited M.Arch program enrolling 550+ students",
+        "Graduate Coordinator, M.Arch (2016–2023)",
+        "Visiting Professor, University of Hawaii at Manoa (2007)"
+      ]
+    },
+    {
+      "name": "The Parallax View, WRUU 107.5FM",
+      "position": "Radio Host",
+      "startDate": "2021-01-01",
+      "endDate": "2023-01-01",
+      "summary": "Weekly program engaging listeners on the design and urbanism shaping civic life."
+    },
+    {
+      "name": "Fix It & Finish It",
+      "position": "Co-Host and Lead Designer",
+      "startDate": "2015-01-01",
+      "endDate": "2016-01-01",
+      "summary": "Nationally syndicated television program; co-host and lead designer of episodes filmed in Savannah, GA."
+    },
+    {
+      "name": "Jasper Design Services, LLC",
+      "position": "Principal",
+      "startDate": "2011-01-01",
+      "endDate": "2021-01-01",
+      "summary": "Boutique design practice providing critical solutions and strategies for diverse regional and international clients."
+    },
+    {
+      "name": "Burke, Hogue & Mills Associates, Inc.",
+      "position": "Associate and Project Manager/Designer",
+      "startDate": "1998-01-01",
+      "endDate": "2003-01-01",
+      "summary": "Lake Mary, FL."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Savannah College of Art and Design",
+      "location": "Savannah, GA",
+      "url": "https://www.scad.edu",
+      "area": "Architecture",
+      "studyType": "M.Arch"
+    },
+    {
+      "institution": "Savannah College of Art and Design",
+      "location": "Savannah, GA",
+      "url": "https://www.scad.edu",
+      "area": "Architecture",
+      "studyType": "B.F.A."
+    }
+  ],
+  "awards": [
+    {
+      "title": "Outstanding Achievement in Research",
+      "date": "2024-04-10",
+      "awarder": "NCCU College of Arts, Social Sciences, and Humanities",
+      "summary": "Department of Art & Design, April 10, 2024."
+    },
+    {
+      "title": "Dean's Award for Cross-disciplinary Collaboration",
+      "date": "2015-01-01",
+      "awarder": "Savannah College of Art and Design",
+      "summary": "For 'Dakota Jackson: The Making of Dakota Jackson,' exhibition design for the SCAD Museum of Art — the first major museum retrospective of furniture designer Dakota Jackson."
+    },
+    {
+      "title": "Faculty Recognition Award",
+      "date": "2015-01-01",
+      "awarder": "Savannah College of Art and Design, American Institute of Architecture Students"
+    },
+    {
+      "title": "Florida Trust Historic Preservation Award: Tarragona Arch",
+      "date": "2006-01-01",
+      "awarder": "Florida Trust for Historic Preservation",
+      "summary": "Outstanding achievement in the Field of Restoration and Rehabilitation, Daytona Beach, FL."
+    },
+    {
+      "title": "Florida Trust Historic Preservation Award: Daytona Beach Bandshell",
+      "date": "2004-01-01",
+      "awarder": "Florida Trust for Historic Preservation",
+      "summary": "Outstanding achievement in the Field of Restoration and Rehabilitation."
+    },
+    {
+      "title": "ABC Excellence in Construction Eagle Award",
+      "date": "2004-01-01",
+      "awarder": "Associated Builders and Contractors",
+      "summary": "Lakeview Middle School Historic Restoration, $1–$5 Million Category, Winter Garden, FL."
+    }
+  ],
+  "certificates": [
+    {
+      "name": "NCARB Record No. 74335",
+      "issuer": "National Council of Architectural Registration Boards",
+      "icon": "fa-solid fa-building-columns"
+    },
+    {
+      "name": "National Organization of Minority Architects (NOMA)",
+      "date": "2024-01-01",
+      "issuer": "NOMA",
+      "icon": "fa-solid fa-users"
+    },
+    {
+      "name": "College Art Association (CAA)",
+      "date": "2024-01-01",
+      "issuer": "CAA",
+      "icon": "fa-solid fa-palette"
+    },
+    {
+      "name": "Professional Certificate in Data Science",
+      "date": "2018-01-01",
+      "issuer": "Harvard University",
+      "icon": "fa-solid fa-chart-bar"
+    },
+    {
+      "name": "Professional Certificate in Rhino & Grasshopper",
+      "date": "2018-01-01",
+      "issuer": "McNeel & Associates",
+      "icon": "fa-solid fa-cube"
+    }
+  ],
+  "publications": [
+    {
+      "name": "Building Patterns: Affordable Housing Pattern Book for the Southeast",
+      "publisher": "Coastal Empire Habitat for Humanity, Savannah, GA",
+      "releaseDate": "2006-01-01",
+      "summary": "Co-authored with D. Brooks. A pattern book for affordable housing design across the Southeast region."
+    }
+  ],
+  "skills": [
+    {
+      "name": "Architecture & Design",
+      "level": "Expert",
+      "icon": "fa-solid fa-drafting-compass",
+      "keywords": [
+        "Architectural Studio",
+        "Urban Design",
+        "Community-Engaged Design",
+        "Historic Preservation",
+        "Architectural Drawing & Representation"
+      ]
+    },
+    {
+      "name": "Research",
+      "level": "Expert",
+      "icon": "fa-solid fa-magnifying-glass",
+      "keywords": [
+        "Architectural Pedagogy",
+        "Fine Art Printmaking & Architecture",
+        "Digital Humanities",
+        "HBCU Architecture Education",
+        "Computational Form & Representation"
+      ]
+    },
+    {
+      "name": "Digital & Computational",
+      "level": "Proficient",
+      "icon": "fa-solid fa-computer",
+      "keywords": [
+        "Python",
+        "Blender",
+        "Rhino & Grasshopper",
+        "3D Scanning / Photogrammetry",
+        "BIM"
+      ]
+    }
+  ],
+  "interests": [
+    {
+      "name": "Research Areas",
+      "icon": "fa-solid fa-star",
+      "keywords": [
+        "Community-Engaged Design at HBCUs",
+        "Fine Art Printmaking & Architectural Image Production",
+        "Beginning Design Pedagogy",
+        "Digital Humanities & Architectural Archives",
+        "AI in Architectural Education",
+        "Computational Form & Generative Media"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "NCCU Eyrie Initiative Community Design Center",
+      "summary": "First community design center at an HBCU in North Carolina, directing community-engaged design research and practice. Current work includes the Fayetteville Street / Hayti Heritage Corridor Initiative (Preservation Durham, $10,000 contract) and 10 National Trust HOPE Crew student fellowships ($50,000 total).",
+      "highlights": ["LS3P Foundation: $142,500 (2025–2028)", "Preservation Durham contract: $10,000 (2026)"],
+      "startDate": "2024-01-01",
+      "url": ""
+    },
+    {
+      "name": "CLOUD Collaborative Research Project",
+      "summary": "Practice-based research initiative treating atmospheric clouds as a vehicle for exploring computational form, representation, and metaphor, using Python and Blender. Co-authorship of the 2025 cataloging framework and public contributor call.",
+      "startDate": "2025-01-01"
+    },
+    {
+      "name": "Digital Eagles Nest",
+      "summary": "Cross-disciplinary digital humanities project capturing and digitizing NCCU's historic campus through 3D scanning, photogrammetry, archival research, and virtual presentation — blending architectural, cultural, and social histories into a public digital campus resource.",
+      "startDate": "2024-01-01"
+    },
+    {
+      "name": "Fine Art Printmaking & Architectural Image Production",
+      "summary": "Research examining how lithography and fine art printmaking shaped the public reception of major American architectural projects — an underexplored intersection of architectural history and art history. NEH Award for Faculty at HBCUs submitted ($37,500, under review).",
+      "startDate": "2024-01-01"
+    }
+  ]
+>>>>>>> 3f0da29 (Update site with accurate CV, publications, and bio)
 }
