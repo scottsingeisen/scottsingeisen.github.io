@@ -6,7 +6,7 @@ inline: false
 related_posts: false
 ---
 
-The Eyrie Initiative Community Design Center at NCCU launched *Building Black North Carolina*, an annual public lecture and intergenerational panel forum documenting, reclaiming, and disseminating the contributions of Black architects to the built environment of North Carolina. The inaugural edition — a sold-out hybrid event on February 23, 2026 — established proof of concept for a program addressing histories that exist in no conventional archive.
+The Eyrie Initiative Community Design Center at NCCU launched _Building Black North Carolina_, an annual public lecture and intergenerational panel forum documenting, reclaiming, and disseminating the contributions of Black architects to the built environment of North Carolina. The inaugural edition — a sold-out hybrid event on February 23, 2026 — established proof of concept for a program addressing histories that exist in no conventional archive.
 
 ---
 
@@ -22,6 +22,6 @@ In-person audiences in Durham were joined virtually by NOMAS student chapters at
 
 #### The Format as Methodology
 
-*Building Black North Carolina* pairs an illustrated lecture on the history of Black architects in the state with a live intergenerational panel conversation. The format is intentional: living practitioners are treated as primary sources, and structured public dialogue as the instrument of historical recovery. Histories that exist nowhere in the written record — what it cost to integrate an architecture school in the South, what it took to open a practice in a city that had never seen a Black architect — surface in this format and nowhere else.
+_Building Black North Carolina_ pairs an illustrated lecture on the history of Black architects in the state with a live intergenerational panel conversation. The format is intentional: living practitioners are treated as primary sources, and structured public dialogue as the instrument of historical recovery. Histories that exist nowhere in the written record — what it cost to integrate an architecture school in the South, what it took to open a practice in a city that had never seen a Black architect — surface in this format and nowhere else.
 
 The program will be produced annually by the Eyrie Initiative. A Graham Foundation grant application is currently under review to support the second annual program, a publication documenting the inaugural year, and the establishment of a permanent advisory board.
