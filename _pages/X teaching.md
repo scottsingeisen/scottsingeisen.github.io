@@ -3,7 +3,7 @@ layout: page
 permalink: /teaching/
 title: teaching
 description: A collection of student courses from my teaching experience across all levels of architectural education at different universities.
-nav: true
+nav: false
 nav_order: 6
 ---
 

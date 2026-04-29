@@ -5,7 +5,7 @@ permalink: /
 subtitle: Associate Professor of Architecture, <a href="https://www.nccu.edu">North Carolina Central University</a>
 
 profile:
-  align: right
+  align: left
   image: prof_pic.jpg
   image_circular: false
   more_info: >
