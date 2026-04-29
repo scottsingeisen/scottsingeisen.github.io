@@ -19,7 +19,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-I am Associate Professor of Architecture in the Department of Art & Design at North Carolina Central University, where I serve as the founding architect of NCCU's Pre-Architecture Concentration — the first pre-architecture program established at an HBCU in North Carolina.
+I am Associate Professor of Architecture in the Department of Art & Design at North Carolina Central University, where I serve as the founding coordinator of NCCU's Pre-Architecture Concentration — the first pre-architecture program established at an HBCU in North Carolina.
 
 In 2024 I founded the [Eyrie Initiative Community Design Center](https://www.nccu.edu), the first community design center at an HBCU in North Carolina, which I direct alongside my teaching. The Eyrie Initiative advances community-engaged design research and practice in Durham and the surrounding region, including a multi-partner corridor study and urban design effort along Fayetteville Street and the Hayti Heritage District.
 
