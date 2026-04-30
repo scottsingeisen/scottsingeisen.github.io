@@ -25,4 +25,6 @@ In 2024 I founded the [Eyrie Initiative Community Design Center](https://www.ncc
 
 My research moves across three areas: the history and theory of architectural image production (specifically the role of fine art printmaking in shaping public perception of American architecture); beginning design pedagogy; and digital humanities applied to historically significant built environments. I am also a contributing member of the CLOUD Collaborative, a practice-based research group using computational tools — Python, Blender, and the Alembic standard — to explore atmospheric form and representation.
 
-Before coming to NCCU I spent nearly two decades at the Savannah College of Art and Design, where I taught architecture and urban design at every level of the curriculum, chaired the Department of Architecture (2007–2012), and coordinated the M.Arch program (2016–2023). I hold an M.Arch and B.F.A. in Architecture, both from SCAD, and hold an NCARB record.
+Before coming to NCCU I spent nearly two decades at the Savannah College of Art and Design, where I taught architecture and urban design at every level of the curriculum, chaired the Department of Architecture (2007–2012), and coordinated the M.Arch program (2016–2023). I hold an M.Arch and B.F.A. in Architecture from SCAD and maintain an NCARB record.
+
+<div style="clear: both;"></div>
