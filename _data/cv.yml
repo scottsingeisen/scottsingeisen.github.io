@@ -2,96 +2,187 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
-    - name: Date of Birth
-      value: 14th March 1879
-    - name: Languages
-      value: English, German
+      value: Scott Singeisen
+    - name: Position
+      value: Associate Professor of Architecture, Department of Art & Design, North Carolina Central University
+    - name: Email
+      value: ssingeis@nccu.edu
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
-      description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
-      description:
-        - Description 1.
-        - Description 2.
+    - title: M.Arch, Architecture
+      institution: Savannah College of Art and Design, Savannah, GA
+    - title: B.F.A., Architecture
+      institution: Savannah College of Art and Design, Savannah, GA
 
-- title: Experience
+- title: Academic Positions
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Associate Professor of Architecture
+      institution: Department of Art & Design, North Carolina Central University, Durham, NC
+      year: 2023 – present
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - Inaugural professor of architecture at NCCU; first pre-architecture program at an HBCU in North Carolina.
+    - title: Founder & Director, Eyrie Initiative Community Design Center
+      institution: Department of Art & Design, NCCU, Durham, NC
+      year: 2024 – present
       description:
-        - Description 1.
-        - Description 2.
-
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
+        - First community design center established at an HBCU in North Carolina.
+        - Directs community-engaged design research and practice; secured seed and ongoing funding.
+    - title: Coordinator, Pre-Architecture Concentration
+      institution: Department of Art & Design, NCCU, Durham, NC
+      year: 2023 – present
+    - title: Professor of Architecture & Urban Design
+      institution: Department of Architecture, Savannah College of Art and Design, Savannah, GA
+      year: 2004 – 2023
       description:
+        - Teaching across all studio levels; focused in undergraduate and graduate architecture studios, architectural representation, and beginning design.
+    - title: Graduate Coordinator, M.Arch
+      institution: Department of Architecture, Savannah College of Art and Design, Savannah, GA
+      year: 2016 – 2023
+    - title: Department Chair
+      institution: Department of Architecture, Savannah College of Art and Design, Savannah, GA
+      year: 2007 – 2012
+      description:
+        - Led a top-25 nationally recognized NAAB-accredited M.Arch program enrolling 450+ undergraduates and 100+ graduate students.
+    - title: Visiting Professor of Architecture
+      institution: School of Architecture, University of Hawaii at Manoa, Honolulu, HI
+      year: 2007
 
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
+- title: Grants & Sponsored Research
   type: time_table
   contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+    - title: National Trust HOPE Crew Fellowships
+      institution: National Trust for Historic Preservation
+      year: 2026
+      description:
+        - 10 student fellowships ($5,000 each; $50,000 total) in conjunction with the NCCU Eyrie Initiative.
+    - title: Fayetteville Corridor Study
+      institution: Preservation Durham
+      year: 2026
+      description:
+        - Contract in support of the NCCU Eyrie Initiative. $10,000.
+    - title: Cave of Dreams — An AI-Integrated Prototype for Immersive Virtual Environments
+      institution: ARCADE Incubator Grant, University of North Carolina at Greensboro
+      year: 2026
+      description:
+        - Co-Principal Investigator. $5,000.
+    - title: NCCU Eyrie Initiative
+      institution: LS3P Foundation
+      year: 2025 – 2028
+      description:
+        - Principal Investigator. $142,500.
+    - title: Empowering Architectural Education Through Artificial Intelligence
+      institution: NCCU Sponsored Research Grant
+      year: 2025 – 2026
+      description:
+        - Principal Investigator. $10,000.
+    - title: NCCU–Duke Digital Humanities Course Development Fellowship
+      institution: Mellon Humanities Unbounded Initiative, Duke University
+      year: 2024
+      description:
+        - Faculty Fellow. $2,000.
+    - title: The Influence of Lithography Printmaking on Architectural Image Production and Reception
+      institution: NCCU Sponsored Research Grant
+      year: 2023 – 2024
+      description:
+        - Principal Investigator. $8,276.
 
-- title: Honors and Awards
+- title: Selected Publications
   type: time_table
   contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
+    - title: "As Is, Where Is: Phenomenological Domesticity and the Circulation of Anonymous Objects"
+      institution: Home Cultures
+      year: 2026
+      description:
+        - Submitted May 2026. Under review.
+    - title: "Designing With, Not For: How One HBCU Program Is Changing What Architectural Education Looks Like"
+      institution: NC Architecture, AIA North Carolina
+      year: 2026
+      description:
+        - Under review.
+    - title: "Architecture Makes Strange Bedfellows: The Workmanship of Risk and Certainty in Digital Design Education"
+      institution: Proceedings of NCBDS40, NC State University College of Design, Raleigh, NC
+      year: 2025
+    - title: "Fluid Pedagogy: The Queer Art of Failure in Architectural Studio Teaching"
+      institution: AMPS Proceedings Series 36.2, pp. 336–343
+      year: 2024
+    - title: Disorienting Dilemma
+      institution: Proceedings of the ACSA/EAAE Teachers Conference, University of Antwerp
+      year: 2021
+    - title: "Building Patterns: Affordable Housing Pattern Book for the Southeast"
+      institution: Coastal Empire Habitat for Humanity, Savannah, GA
+      year: 2006
+      description:
+        - Co-authored with D. Brooks.
 
-- title: Academic Interests
+- title: Selected Presentations
+  type: time_table
+  contents:
+    - title: "The Digital Eagles Nest: Student-Authored Architectural Archives at an HBCU"
+      institution: College Art Association 114th Annual Conference, Chicago, IL
+      year: 2026
+    - title: Building Black North Carolina — Inaugural Lecture and Panel Program
+      institution: NCCU Art Museum, Durham, NC
+      year: 2026
+      description:
+        - Organizer. Featured lecture by George Smart; panel with Arthur Clement, Danita Brown, and Cathy Morrison. 65 in-person, 41 via Zoom.
+    - title: "The Influence of Fine Art Printmaking on Architectural Image Production and Reception"
+      institution: College Art Association 113th Annual Conference, New York, NY
+      year: 2025
+    - title: "Architecture Makes Strange Bedfellows: The Workmanship of Risk and Certainty in Digital Design Education"
+      institution: NCBDS 40th Annual Conference, NC State University College of Design, Raleigh, NC
+      year: 2025
+    - title: The Abstraction of Information
+      institution: SpatioTemporal Symposium, UNC Charlotte Ravin School of Architecture
+      year: 2025
+      description:
+        - Respondent.
+    - title: "The Influence of Lithography Printmaking on Architectural Image Production and Reception"
+      institution: Southeast Society of Architectural Historians Annual Meeting, Kennesaw State University, Marietta, GA
+      year: 2024
+    - title: Disegno
+      institution: Invited lecture, UNC Charlotte School of Architecture, Charlotte, NC
+      year: 2024
+
+- title: Research
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Architectural Image Production & Fine Art Printmaking
       items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+        - Examining how fine art printmaking — lithography in particular — shaped the production and public reception of American architectural images, 1978–1993.
+    - title: Beginning Design Pedagogy
       items:
-        - Description 1.
-        - Description 2.
+        - Ongoing research into digital tools, risk and certainty, and the role of representation in architectural thinking at the beginning design level.
+    - title: Digital Humanities & Built Environments
+      items:
+        - The Digital Eagles Nest — a digital humanities course at NCCU in which students author an architectural archive of the NCCU campus using 3D scanning, photogrammetry, LiDAR, and oral history.
+    - title: CLOUD Collaborative
+      items:
+        - Practice-based research initiative treating atmospheric clouds as a vehicle for exploring computational form, representation, and metaphor using Python, Blender, and the Alembic standard.
 
-- title: Other Interests
-  type: list
+- title: Creative Works
+  type: time_table
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - title: No Two Are the Same
+      institution: Faculty Exhibition, NCCU Museum of Art, Durham, NC
+      year: 2026
+      description:
+        - Generative video (Python, Blender), 40 seconds. February 10 – March 13, 2026.
+    - title: "In the Sky: CLOUDS"
+      institution: "In the Sky: Clouds Lent Out Use Discipline, Ewing Gallery, University of Tennessee Knoxville"
+      year: 2025
+      description:
+        - Generative video (Python, Blender), 40 seconds. October 27 – December 2, 2025.
+
+- title: Service
+  type: nested_list
+  contents:
+    - title: University & Departmental
+      items:
+        - NCCU AI Working Group, co-chair of Professional Development Committee (2023–present)
+    - title: Public & Civic
+      items:
+        - City of Durham Historic Preservation Commission (2024–2027)
+        - AIA Triangle Educational Scholarship Program, Partnership Coordinator (2026–present)
