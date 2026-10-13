@@ -97,19 +97,19 @@
     /* ── Study container ── */
     .study-wrap {
       position: relative;
-      width: 100%;
-      aspect-ratio: 1536 / 1024;
-      max-height: 72vh;
+      display: inline-block;
+      max-width: 100%;
+      line-height: 0;
       border-top: 1px solid var(--brown-mid);
       border-bottom: 1px solid var(--brown-mid);
     }
 
     .study-wrap img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
       display: block;
+      width: auto;
+      height: auto;
+      max-width: 100vw;
+      max-height: 72vh;
     }
 
     .study-wrap svg {
