@@ -19,20 +19,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: var(--brown);
+      background: var(--parchment);
       color: var(--brown);
       font-family: 'Playfair Display', Georgia, serif;
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 2rem 1rem;
     }
 
     .page {
       background: var(--parchment);
-      max-width: 1100px;
       width: 100%;
-      padding: 3rem 3.5rem 2.5rem;
+      padding: 2.5rem 0 2.5rem;
+    }
+
+    .page-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
     }
 
     /* ── Decorative border ── */
@@ -90,8 +92,9 @@
       width: 100%;
       /* maintain 3:2 aspect ratio */
       padding-bottom: calc(100% * 1024 / 1536);
-      margin: 2rem 0 1.5rem;
-      border: 1px solid var(--brown-mid);
+      margin: 2rem 0 0;
+      border-top: 1px solid var(--brown-mid);
+      border-bottom: 1px solid var(--brown-mid);
     }
 
     .study-wrap img {
@@ -186,34 +189,50 @@
 
     /* ── Legend ── */
     .legend {
-      border-top: 1px solid var(--brown-mid);
-      padding-top: 1.2rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem 1.4rem;
+      padding: 2rem 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem 2.5rem;
       margin-bottom: 1.5rem;
     }
 
     .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-      font-size: 0.75rem;
-      color: var(--brown);
+      display: grid;
+      grid-template-columns: 18px 2.8rem 1fr;
+      align-items: start;
+      gap: 0 0.75rem;
     }
 
     .swatch {
-      width: 14px;
-      height: 14px;
-      border: 1px solid rgba(42,26,14,0.4);
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      border: 1px solid rgba(42,26,14,0.35);
       flex-shrink: 0;
     }
 
     .legend-code {
       font-family: 'Cinzel', serif;
-      font-size: 0.65rem;
+      font-size: 0.68rem;
       letter-spacing: 0.1em;
       font-weight: 700;
+      color: var(--brown);
+      padding-top: 1px;
+    }
+
+    .legend-label {
+      font-size: 0.82rem;
+      color: var(--brown);
+      line-height: 1.35;
+    }
+
+    .legend-desc {
+      grid-column: 3;
+      font-size: 0.72rem;
+      font-style: italic;
+      color: var(--brown-mid);
+      line-height: 1.4;
+      margin-top: 0.2rem;
     }
 
     /* ── Footer note ── */
@@ -237,14 +256,15 @@
 <body>
 
 <div class="page">
+  <div class="page-inner">
   <div class="border-top"></div>
 
   <header>
     <p class="header-eyebrow">A Digital Humanities Project &nbsp;·&nbsp; Draft</p>
     <h1 class="header-title">The Illustrated Freud</h1>
     <div class="header-rule"></div>
-    <p class="header-subtitle">What Freud drew, what he looked at, and how the world drew psychoanalysis back.</p>
   </header>
+  </div>
 
   <!-- Interactive Study -->
   <div class="study-wrap" id="studyWrap">
@@ -317,41 +337,57 @@
     </svg>
   </div>
 
+  <div class="page-inner">
   <!-- Legend -->
   <div class="legend">
     <div class="legend-item">
       <div class="swatch" style="background:rgba(70,110,55,0.5)"></div>
-      <span class="legend-code">L</span><span>Library</span>
+      <span class="legend-code">L</span>
+      <span class="legend-label">Freud's Library</span>
+      <span class="legend-desc">Books in Freud's personal collection, catalogued in Davies &amp; Fichtner (2006)</span>
     </div>
     <div class="legend-item">
       <div class="swatch" style="background:rgba(110,55,130,0.5)"></div>
-      <span class="legend-code">B</span><span>Illustrated Books about Freud</span>
+      <span class="legend-code">B</span>
+      <span class="legend-label">Illustrated Books about Freud</span>
+      <span class="legend-desc">Picture books, graphic novels, and illustrated works about Freud and psychoanalysis</span>
     </div>
     <div class="legend-item">
       <div class="swatch" style="background:rgba(45,105,115,0.5)"></div>
-      <span class="legend-code">S</span><span>Works on Paper in the Study</span>
+      <span class="legend-code">S</span>
+      <span class="legend-label">Works on Paper in the Study</span>
+      <span class="legend-desc">Prints, etchings, engravings, and drawings at Berggasse 19 and Maresfield Gardens</span>
     </div>
     <div class="legend-item">
       <div class="swatch" style="background:rgba(200,98,26,0.5)"></div>
-      <span class="legend-code">F</span><span>Portraits of Freud</span>
+      <span class="legend-code">F</span>
+      <span class="legend-label">Portraits of Freud</span>
+      <span class="legend-desc">Drawings, etchings, and lithographs of Freud made from life or during his lifetime</span>
     </div>
     <div class="legend-item">
       <div class="swatch" style="background:rgba(185,45,30,0.5)"></div>
-      <span class="legend-code">P</span><span>Psychoanalysis in the Press</span>
+      <span class="legend-code">P</span>
+      <span class="legend-label">Psychoanalysis in the Press</span>
+      <span class="legend-desc">Illustrations, cartoons, and caricatures in magazines and newspapers</span>
     </div>
     <div class="legend-item">
       <div class="swatch" style="background:rgba(175,140,25,0.5)"></div>
-      <span class="legend-code">D · W</span><span>Illustrations in Freud's Writings</span>
+      <span class="legend-code">D · W</span>
+      <span class="legend-label">Illustrations in Freud's Writings</span>
+      <span class="legend-desc">Images Freud drew and illustrations reproduced in his published works and letters</span>
     </div>
     <div class="legend-item">
       <div class="swatch" style="background:rgba(55,80,150,0.5)"></div>
-      <span class="legend-code">R</span><span>References to Illustration</span>
+      <span class="legend-code">R</span>
+      <span class="legend-label">References to Illustration</span>
+      <span class="legend-desc">Passages where Freud wrote about or described specific images in his works and correspondence</span>
     </div>
   </div>
 
   <p class="foot-note">Hover over the study to explore the catalogue. Click to enter. &nbsp;·&nbsp; Draft — not for citation.</p>
 
   <div class="border-bottom"></div>
+  </div>
 </div>
 
 <!-- Tooltip -->
