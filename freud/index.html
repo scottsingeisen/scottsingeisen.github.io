@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Illustrated Freud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment:     #f0e8d5;
+      --parchment-dark:#e8dcc4;
+      --brown:         #2a1a0e;
+      --brown-mid:     #6b4226;
+      --orange:        #c8621a;
+      --orange-light:  #e07830;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--brown);
+      color: var(--brown);
+      font-family: 'Playfair Display', Georgia, serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .page {
+      background: var(--parchment);
+      max-width: 1100px;
+      width: 100%;
+      padding: 3rem 3.5rem 2.5rem;
+    }
+
+    /* ── Decorative border ── */
+    .border-top {
+      border-top: 3px solid var(--brown);
+      border-bottom: 1px solid var(--brown);
+      height: 8px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header-eyebrow {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--brown-mid);
+      margin-bottom: 0.6rem;
+    }
+
+    .header-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      color: var(--brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .header-rule {
+      width: 60px;
+      height: 2px;
+      background: var(--orange);
+      margin: 0.8rem auto;
+    }
+
+    .header-subtitle {
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--brown-mid);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* ── Study container ── */
+    .study-wrap {
+      position: relative;
+      width: 100%;
+      /* maintain 3:2 aspect ratio */
+      padding-bottom: calc(100% * 1024 / 1536);
+      margin: 2rem 0 1.5rem;
+      border: 1px solid var(--brown-mid);
+    }
+
+    .study-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .study-wrap svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+
+    /* ── Zone styles ── */
+    .zone {
+      fill: transparent;
+      stroke: transparent;
+      stroke-width: 1;
+      transition: fill 0.18s ease, stroke 0.18s ease;
+      cursor: pointer;
+    }
+
+    .zone:hover { stroke-width: 2; }
+
+    .zone-L:hover  { fill: rgba(70,110,55,0.38);   stroke: rgba(70,110,55,0.7); }
+    .zone-B:hover  { fill: rgba(110,55,130,0.38);  stroke: rgba(110,55,130,0.7); }
+    .zone-S:hover  { fill: rgba(45,105,115,0.38);  stroke: rgba(45,105,115,0.7); }
+    .zone-F:hover  { fill: rgba(200,98,26,0.38);   stroke: rgba(200,98,26,0.7); }
+    .zone-P:hover  { fill: rgba(185,45,30,0.38);   stroke: rgba(185,45,30,0.7); }
+    .zone-DW:hover { fill: rgba(175,140,25,0.38);  stroke: rgba(175,140,25,0.7); }
+    .zone-R:hover  { fill: rgba(55,80,150,0.38);   stroke: rgba(55,80,150,0.7); }
+    .zone-EGG:hover{ fill: rgba(40,40,40,0.30);    stroke: rgba(40,40,40,0.5); stroke-dasharray: 6 4; }
+
+    /* ── Tooltip ── */
+    #tooltip {
+      position: fixed;
+      background: var(--brown);
+      color: var(--parchment);
+      padding: 0.9rem 1.2rem;
+      border-left: 4px solid var(--orange);
+      max-width: 280px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      z-index: 999;
+      font-family: 'Playfair Display', serif;
+    }
+
+    #tooltip.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tip-code {
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      color: var(--orange-light);
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .tip-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--parchment);
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .tip-body {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: #c8b89a;
+      line-height: 1.45;
+    }
+
+    .tip-action {
+      font-family: 'Cinzel', serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      color: var(--orange-light);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    /* ── Legend ── */
+    .legend {
+      border-top: 1px solid var(--brown-mid);
+      padding-top: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      color: var(--brown);
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border: 1px solid rgba(42,26,14,0.4);
+      flex-shrink: 0;
+    }
+
+    .legend-code {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    /* ── Footer note ── */
+    .foot-note {
+      text-align: center;
+      font-style: italic;
+      font-size: 0.78rem;
+      color: var(--brown-mid);
+      border-top: 1px solid var(--brown-mid);
+      padding-top: 1rem;
+    }
+
+    .border-bottom {
+      border-top: 1px solid var(--brown);
+      border-bottom: 3px solid var(--brown);
+      height: 8px;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <div class="border-top"></div>
+
+  <header>
+    <p class="header-eyebrow">A Digital Humanities Project &nbsp;·&nbsp; Draft</p>
+    <h1 class="header-title">The Illustrated Freud</h1>
+    <div class="header-rule"></div>
+    <p class="header-subtitle">What Freud drew, what he looked at, and how the world drew psychoanalysis back.</p>
+  </header>
+
+  <!-- Interactive Study -->
+  <div class="study-wrap" id="studyWrap">
+    <img src="../assets/img/freud/study.webp" alt="Freud's study at Berggasse 19, Vienna">
+
+    <!--
+      SVG overlay — viewBox matches image dimensions 1536 × 1024
+      Zones are approximate polygons; coordinates can be refined.
+    -->
+    <svg viewBox="0 0 1536 1024" preserveAspectRatio="none"
+         aria-hidden="true" id="studySVG">
+
+      <!-- L · Freud's Library (main central bookshelves) -->
+      <polygon class="zone zone-L"
+        data-code="CATALOGUE · L"
+        data-title="Freud's Library"
+        data-body="Books in Freud's personal collection, catalogued with reference to Davies &amp; Fichtner, Freud's Library (2006). Many volumes were illustrated."
+        points="305,5 740,5 740,530 305,530"/>
+
+      <!-- B · Illustrated Books about Freud (right upper bookshelves) -->
+      <polygon class="zone zone-B"
+        data-code="CATALOGUE · B"
+        data-title="Illustrated Books about Freud"
+        data-body="Picture books, collage novels, comics, and graphic novels about Freud and psychoanalysis — most published after his death."
+        points="745,5 900,5 900,530 745,530"/>
+
+      <!-- S · Works on Paper in the Study (framed prints, owl, masks) -->
+      <polygon class="zone zone-S"
+        data-code="CATALOGUE · S"
+        data-title="Works on Paper in the Study"
+        data-body="Prints, etchings, engravings, and drawings from Freud's study at Berggasse 19 and Maresfield Gardens. Dated by the work itself, or the original it reproduces."
+        points="5,5 302,5 302,200 240,250 250,535 5,535"/>
+
+      <!-- F · Portraits of Freud (the mirror) -->
+      <polygon class="zone zone-F"
+        data-code="CATALOGUE · F"
+        data-title="Portraits of Freud"
+        data-body="Drawings, sketches, etchings, and lithographs of Freud made from life or during his lifetime. Format: F-YEAR-NNN."
+        points="1220,245 1390,245 1410,310 1395,530 1215,530 1200,430"/>
+
+      <!-- P · Press (magazines and newspapers on the desk) -->
+      <polygon class="zone zone-P"
+        data-code="CATALOGUE · P"
+        data-title="Psychoanalysis in the Press"
+        data-body="Illustrations of psychoanalysis in magazines, newspapers, and cartoons — the medium through which psychoanalysis reached the world."
+        points="310,720 755,720 770,875 755,1015 310,1015 295,875"/>
+
+      <!-- D/W · Illustrations in Freud's Letters and Writings -->
+      <polygon class="zone zone-DW"
+        data-code="CATALOGUE · D · W"
+        data-title="Illustrations in Freud's Letters and Writings"
+        data-body="Images Freud drew himself and illustrations reproduced in his published works — from histological diagrams to the figures in his case studies."
+        points="760,650 920,650 935,760 920,870 760,870 745,760"/>
+
+      <!-- R · References (right artifact table) -->
+      <polygon class="zone zone-R"
+        data-code="CATALOGUE · R"
+        data-title="References to Illustration"
+        data-body="Passages in Freud's works and letters where he writes about, describes, or reflects on specific images and illustrations."
+        points="1020,645 1350,645 1365,800 1350,1010 1020,1010 1005,800"/>
+
+      <!-- Easter egg · This image is itself an illustration -->
+      <polygon class="zone zone-EGG"
+        data-code="A NOTE ON THIS IMAGE"
+        data-title="This image is itself an illustration"
+        data-body="Freud's study no longer exists in this form. What you are navigating is a reconstruction — a drawing of a room that was always, already, mediated by representation. The project's subject is also its method."
+        data-egg="true"
+        points="960,370 1215,370 1215,640 960,640"/>
+
+    </svg>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(70,110,55,0.5)"></div>
+      <span class="legend-code">L</span><span>Library</span>
+    </div>
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(110,55,130,0.5)"></div>
+      <span class="legend-code">B</span><span>Illustrated Books about Freud</span>
+    </div>
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(45,105,115,0.5)"></div>
+      <span class="legend-code">S</span><span>Works on Paper in the Study</span>
+    </div>
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(200,98,26,0.5)"></div>
+      <span class="legend-code">F</span><span>Portraits of Freud</span>
+    </div>
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(185,45,30,0.5)"></div>
+      <span class="legend-code">P</span><span>Psychoanalysis in the Press</span>
+    </div>
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(175,140,25,0.5)"></div>
+      <span class="legend-code">D · W</span><span>Illustrations in Freud's Writings</span>
+    </div>
+    <div class="legend-item">
+      <div class="swatch" style="background:rgba(55,80,150,0.5)"></div>
+      <span class="legend-code">R</span><span>References to Illustration</span>
+    </div>
+  </div>
+
+  <p class="foot-note">Hover over the study to explore the catalogue. Click to enter. &nbsp;·&nbsp; Draft — not for citation.</p>
+
+  <div class="border-bottom"></div>
+</div>
+
+<!-- Tooltip -->
+<div id="tooltip">
+  <p class="tip-code" id="tipCode"></p>
+  <p class="tip-title" id="tipTitle"></p>
+  <p class="tip-body" id="tipBody"></p>
+  <p class="tip-action" id="tipAction"></p>
+</div>
+
+<script>
+  const tooltip  = document.getElementById('tooltip');
+  const tipCode  = document.getElementById('tipCode');
+  const tipTitle = document.getElementById('tipTitle');
+  const tipBody  = document.getElementById('tipBody');
+  const tipAction= document.getElementById('tipAction');
+
+  const zones = document.querySelectorAll('.zone');
+
+  zones.forEach(zone => {
+    zone.addEventListener('mouseenter', e => {
+      tipCode.textContent  = zone.dataset.code  || '';
+      tipTitle.textContent = zone.dataset.title || '';
+      tipBody.innerHTML    = zone.dataset.body  || '';
+      tipAction.textContent = zone.dataset.egg
+        ? ''
+        : 'Click to enter the catalogue →';
+      tooltip.classList.add('visible');
+    });
+
+    zone.addEventListener('mousemove', e => {
+      const x = e.clientX + 18;
+      const y = e.clientY + 18;
+      const tw = tooltip.offsetWidth;
+      const th = tooltip.offsetHeight;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      tooltip.style.left = (x + tw > vw ? e.clientX - tw - 12 : x) + 'px';
+      tooltip.style.top  = (y + th > vh ? e.clientY - th - 12 : y) + 'px';
+    });
+
+    zone.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('visible');
+    });
+  });
+</script>
+
+</body>
+</html>
