@@ -94,13 +94,9 @@
       line-height: 1.5;
     }
 
-    /* ── Study container ── */
+    /* ── Study container — width + height set by JS ── */
     .study-wrap {
       position: relative;
-      width: 100%;
-      /* maintain 3:2 aspect ratio */
-      padding-bottom: calc(100% * 1024 / 1536);
-      margin: 2rem 0 0;
       border-top: 1px solid var(--brown-mid);
       border-bottom: 1px solid var(--brown-mid);
     }
@@ -415,10 +411,12 @@
     const footer = document.getElementById('pageFooter');
     const wrap   = document.getElementById('studyWrap');
     if (!header || !footer || !wrap) return;
-    const availH = window.innerHeight - header.offsetHeight - footer.offsetHeight - 12;
-    const maxW   = Math.floor(availH * (1536 / 1024));
-    wrap.style.maxWidth = Math.min(maxW, window.innerWidth) + 'px';
-    wrap.style.width    = '100%';
+    const availH  = window.innerHeight - header.offsetHeight - footer.offsetHeight - 16;
+    const byHeightW = Math.floor(availH * (1536 / 1024));
+    const actualW   = Math.min(byHeightW, window.innerWidth);
+    const actualH   = Math.floor(actualW * (1024 / 1536));
+    wrap.style.width  = actualW + 'px';
+    wrap.style.height = actualH + 'px';
   }
   window.addEventListener('resize', fitStudy);
   document.fonts.ready.then(fitStudy);
