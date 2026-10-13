@@ -28,13 +28,21 @@
     .page {
       background: var(--parchment);
       width: 100%;
-      padding: 2.5rem 0 2.5rem;
+      padding: 1.5rem 0;
     }
 
     .page-inner {
       max-width: 900px;
       margin: 0 auto;
       padding: 0 2.5rem;
+    }
+
+    /* ── Study section: centers the width-constrained wrap ── */
+    .study-section {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin: 1.5rem 0 0;
     }
 
     /* ── Decorative border ── */
@@ -256,7 +264,7 @@
 <body>
 
 <div class="page">
-  <div class="page-inner">
+  <div class="page-inner" id="pageHeader">
   <div class="border-top"></div>
 
   <header>
@@ -267,6 +275,7 @@
   </div>
 
   <!-- Interactive Study -->
+  <div class="study-section">
   <div class="study-wrap" id="studyWrap">
     <img src="../assets/img/freud/study.webp" alt="Freud's study at Berggasse 19, Vienna">
 
@@ -336,8 +345,9 @@
 
     </svg>
   </div>
+  </div><!-- /study-section -->
 
-  <div class="page-inner">
+  <div class="page-inner" id="pageFooter">
   <!-- Legend -->
   <div class="legend">
     <div class="legend-item">
@@ -399,6 +409,22 @@
 </div>
 
 <script>
+  /* ── Fit study to viewport so full image is visible without scrolling ── */
+  function fitStudy() {
+    const header = document.getElementById('pageHeader');
+    const footer = document.getElementById('pageFooter');
+    const wrap   = document.getElementById('studyWrap');
+    if (!header || !footer || !wrap) return;
+    const availH = window.innerHeight - header.offsetHeight - footer.offsetHeight - 12;
+    const maxW   = Math.floor(availH * (1536 / 1024));
+    wrap.style.maxWidth = Math.min(maxW, window.innerWidth) + 'px';
+    wrap.style.width    = '100%';
+  }
+  window.addEventListener('resize', fitStudy);
+  document.fonts.ready.then(fitStudy);
+  fitStudy();
+
+  /* ── Tooltip ── */
   const tooltip  = document.getElementById('tooltip');
   const tipCode  = document.getElementById('tipCode');
   const tipTitle = document.getElementById('tipTitle');
