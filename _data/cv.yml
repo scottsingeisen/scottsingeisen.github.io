@@ -45,7 +45,7 @@
       institution: Department of Architecture, Savannah College of Art and Design, Savannah, GA
       year: 2007 – 2012
       description:
-        - Led a top-25 nationally recognized NAAB-accredited M.Arch program enrolling 450+ undergraduates and 100+ graduate students.
+        - Led a top-25 nationally recognized NAAB-accredited M.Arch program, plus B.F.A., M.U.D., and two post-professional M.F.A. programs, together enrolling about 450 undergraduates and 100 graduate students.
     - title: Visiting Professor of Architecture
       institution: School of Architecture, University of Hawaii at Manoa, Honolulu, HI
       year: 2007
@@ -112,11 +112,11 @@
       year: 2026
       description:
         - Submitted August 2026. Under review.
-    - title: "As Is, Where Is: Phenomenological Domesticity and the Circulation of Anonymous Objects"
-      institution: Home Cultures
+    - title: "Nothing Fits, But Everything Works: Architectural Folly and Spatial Repossession in David Hammons' House of the Future"
+      institution: "Mapping Deviant Spaces through Materials, edited by Nikki Emser and Emma Wingfield"
       year: 2026
       description:
-        - Submitted May 2026. Under review.
+        - Invited chapter; abstract submitted June 2026. Under review.
     - title: "Designing With, Not For: How One HBCU Program Is Changing What Architectural Education Looks Like"
       institution: NC Architecture, AIA North Carolina
       year: 2026
@@ -140,6 +140,11 @@
 - title: Selected Presentations
   type: time_table
   contents:
+    - title: "Event Cities: Evaluating Student Urban Design Proposals for Pedagogical Success"
+      institution: "2027 ARCC International Conference, Architecture of Performance: Bodies / Buildings / Behaviors, New Orleans, LA"
+      year: 2027
+      description:
+        - With Jeremy Leonard. Abstract accepted; full paper under double-blind review.
     - title: "Structural Limitations: Pursuing Community Partnerships within a Semester-Long Urban Design Studio"
       institution: "ACSA Intersections Research Conference: Urban Design Matters"
       year: 2026
@@ -187,6 +192,15 @@
       items:
         - Practice-based research initiative treating atmospheric clouds as a vehicle for exploring computational form, representation, and metaphor using Python, Blender, and the Alembic standard.
 
+- title: Community-Engaged Scholarship & Design Practice
+  type: time_table
+  contents:
+    - title: Fayetteville Street / Hayti Heritage Corridor Initiative
+      institution: NCCU Eyrie Initiative Community Design Center, Durham, NC
+      year: 2026 – present
+      description:
+        - Design Director and Community Partner. Corridor-scale planning and urban design studies (Preservation Durham, $10,000 contract); asset-based community engagement with Durham-Hayti Promise; studio partnership with NC State College of Design (Jeremy Leonard) on housing and mixed-use redevelopment near the Hayti Heritage Center.
+
 - title: Creative Works
   type: time_table
   contents:
@@ -200,6 +214,15 @@
       year: 2025
       description:
         - Generative video (Python, Blender), 40 seconds. October 27 – December 2, 2025.
+
+- title: Practice & Media
+  type: time_table
+  contents:
+    - title: Designed to Last, Hulu Original
+      institution: Design expert and on-camera talent
+      year: 2026
+      description:
+        - Three teams of architects, engineers, and inventors modify tiny homes to withstand environmental hazards in 10-hour build challenges. Hosted by Maria Menounos; sponsored by American Family Insurance. Season 1, four episodes; premiered May 5, 2026.
 
 - title: Awards & Honors
   type: time_table
@@ -218,16 +241,19 @@
   contents:
     - title: University & Departmental
       items:
+        - Advisor, NOMA Student Chapter, NCCU (2025–present)
         - NCCU AI Working Group, co-chair of Professional Development Committee (2023–present)
     - title: Public & Civic
       items:
         - City of Durham Historic Preservation Commission (2024–2027)
         - AIA Triangle Educational Scholarship Program, Partnership Coordinator (2026–present)
+        - Facilitated paid mentorship placements for four NCCU Pre-Architecture students with Prism Design Lab's Youth Design Durham! program (2026)
     - title: Professional
       items:
         - Board of Directors, AIA North Carolina (2025–present)
         - Board of Directors, AIA Triangle (2025–present)
         - Co-Director, NCNOMA Virtual Programming Series (2026–present)
         - Mentorship Chair, NCNOMA Executive Board (2027–2029)
+        - External Reviewer (invited), Academic Program Review, Visual Arts Program, Fayetteville State University (Spring 2027)
         - Advisory Board, Real Matter Biennial, Raleigh, NC (2026–present)
         - Reviewer, CAA Annual Conference Council of Readers (2025–present)
