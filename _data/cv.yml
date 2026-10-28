@@ -53,11 +53,21 @@
 - title: Grants & Sponsored Research
   type: time_table
   contents:
+    - title: "Recovering North Carolina's Unrecorded Architectural Heritage: An Oral History Initiative"
+      institution: CASH Pilot Program, Office of Research Development, NCCU
+      year: 2026 – 2027
+      description:
+        - Principal Investigator. $6,000.
     - title: National Trust HOPE Crew Fellowships
       institution: National Trust for Historic Preservation
       year: 2026
       description:
-        - 10 student fellowships ($5,000 each; $50,000 total) in conjunction with the NCCU Eyrie Initiative.
+        - Coordinator. Six student fellowships ($5,000 each; $30,000 total) in conjunction with the NCCU Eyrie Initiative.
+    - title: "Cave of Dreams: Algorithmic Composition for Real-Time Narrative Structuring in Immersive AI Systems"
+      institution: IAIER Faculty Research and Professional Development (FRAP) Grant, NCCU
+      year: 2026
+      description:
+        - Co-Principal Investigator, with lead PI Dr. Lance Hulme. $9,918.
     - title: Fayetteville Corridor Study
       institution: Preservation Durham
       year: 2026
@@ -92,6 +102,16 @@
 - title: Selected Publications
   type: time_table
   contents:
+    - title: "Use Other Door: Architecture After Occupation"
+      institution: "The Modern City Mediated: Emotion, Space, Image, edited by Miriam Paeslack and Dorothy Barenscott"
+      year: 2026
+      description:
+        - Chapter proposal accepted October 2026. Proposed for Peter Lang Oxford, The City as Place series.
+    - title: A Workmanship of Judgment
+      institution: Journal of Architectural Education
+      year: 2026
+      description:
+        - Submitted August 2026. Under review.
     - title: "As Is, Where Is: Phenomenological Domesticity and the Circulation of Anonymous Objects"
       institution: Home Cultures
       year: 2026
@@ -120,6 +140,11 @@
 - title: Selected Presentations
   type: time_table
   contents:
+    - title: "Structural Limitations: Pursuing Community Partnerships within a Semester-Long Urban Design Studio"
+      institution: "ACSA Intersections Research Conference: Urban Design Matters"
+      year: 2026
+      description:
+        - With Jeremy Leonard (presenting author).
     - title: "The Digital Eagles Nest: Student-Authored Architectural Archives at an HBCU"
       institution: College Art Association 114th Annual Conference, Chicago, IL
       year: 2026
@@ -176,6 +201,18 @@
       description:
         - Generative video (Python, Blender), 40 seconds. October 27 – December 2, 2025.
 
+- title: Awards & Honors
+  type: time_table
+  contents:
+    - title: Volunteer of the Year Award
+      institution: North Carolina Chapter of the National Organization of Minority Architects (NCNOMA)
+      year: 2026
+      description:
+        - For leadership of the NCNOMA Virtual Programming Series.
+    - title: Excellence in Research
+      institution: College of Arts, Social Sciences, and Humanities, NCCU
+      year: 2024
+
 - title: Service
   type: nested_list
   contents:
@@ -186,3 +223,11 @@
       items:
         - City of Durham Historic Preservation Commission (2024–2027)
         - AIA Triangle Educational Scholarship Program, Partnership Coordinator (2026–present)
+    - title: Professional
+      items:
+        - Board of Directors, AIA North Carolina (2025–present)
+        - Board of Directors, AIA Triangle (2025–present)
+        - Co-Director, NCNOMA Virtual Programming Series (2026–present)
+        - Mentorship Chair, NCNOMA Executive Board (2027–2029)
+        - Advisory Board, Real Matter Biennial, Raleigh, NC (2026–present)
+        - Reviewer, CAA Annual Conference Council of Readers (2025–present)
