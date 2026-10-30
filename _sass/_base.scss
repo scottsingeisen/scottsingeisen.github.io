@@ -219,6 +219,13 @@ ul.task-list input[type="checkbox"] {
   margin-right: 1rem;
 }
 
+// Bio text starts where the news text starts, and never wraps under the photo
+@media (min-width: 576px) {
+  .profile.float-left ~ .clearfix {
+    margin-left: calc(20% + 0.3rem);
+  }
+}
+
 @media (min-width: 576px) {
   .profile {
     width: 18%;
