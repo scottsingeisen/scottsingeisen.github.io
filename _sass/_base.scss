@@ -194,14 +194,18 @@ ul.task-list input[type="checkbox"] {
 
 .profile {
   width: 100%;
+  container-type: inline-size;
 
   .more-info {
     margin-bottom: 5px;
     margin-top: 5px;
     font-family: monospace;
+    // scale with the photo width so the email fits on one line
+    font-size: min(1rem, 9cqi);
+    white-space: nowrap;
 
     p {
-      display: inline-block;
+      display: block;
       margin: 0;
     }
   }

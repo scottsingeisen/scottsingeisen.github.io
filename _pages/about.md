@@ -10,9 +10,7 @@ profile:
   image_circular: false
   more_info: >
     <p>912-257-9702</p>
-    <p>Fine Arts Building, room 110</p>
-    <p>1801 Fayetteville St.</p>
-    <p>Durham, NC 27707</p>
+    <p><a href="mailto:ssingeis@nccu.edu">ssingeis@nccu.edu</a></p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
