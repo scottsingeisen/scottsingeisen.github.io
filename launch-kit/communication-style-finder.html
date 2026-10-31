@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Communication Style Finder</title>
+<style>
+  /* Layout: a single centered reading column; quiz items as a vertical stack,
+     results as a four-track bar panel. Four DISC hues carry meaning throughout. */
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --ink: #1f2430;
+    --muted: #5c6475;
+    --line: #e3e1d9;
+    --accent: #2f6d6a;
+    --accent-soft: #e4efed;
+    --d: #d1495b;   /* Driver */
+    --i: #e3a008;   /* Influencer */
+    --s: #3a9d6a;   /* Supporter */
+    --c: #3d6fb4;   /* Analyst */
+    --shadow: 0 1px 2px rgba(31,36,48,.06), 0 8px 24px rgba(31,36,48,.06);
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-body: "Public Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15171c;
+      --surface: #1e2129;
+      --ink: #eceef2;
+      --muted: #a2abbd;
+      --line: #2e323d;
+      --accent: #5fb3af;
+      --accent-soft: #223634;
+      --d: #e86b7c;
+      --i: #f0b53a;
+      --s: #57c088;
+      --c: #6fa0e0;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.4);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15171c;
+    --surface: #1e2129;
+    --ink: #eceef2;
+    --muted: #a2abbd;
+    --line: #2e323d;
+    --accent: #5fb3af;
+    --accent-soft: #223634;
+    --d: #e86b7c;
+    --i: #f0b53a;
+    --s: #57c088;
+    --c: #6fa0e0;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 40px 72px;
+  }
+
+  header { margin-bottom: 28px; }
+  .eyebrow {
+    font-size: .78rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 6vw, 2.9rem);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0 0 14px;
+  }
+  .lede { color: var(--muted); font-size: 1.05rem; max-width: 60ch; margin: 0; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 22px;
+    margin-top: 20px;
+  }
+  .card h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+  }
+  .card p.note { color: var(--muted); font-size: .95rem; margin: 0 0 16px; }
+
+  label.name-field { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 6px; }
+  input[type="text"] {
+    width: 100%;
+    font: inherit;
+    padding: 11px 13px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  input[type="text"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .scale-key {
+    display: flex; flex-wrap: wrap; gap: 8px 16px;
+    font-size: .82rem; color: var(--muted);
+    margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--line);
+  }
+  .scale-key span { white-space: nowrap; }
+  .scale-key b { color: var(--ink); font-weight: 700; }
+
+  .q {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .q:last-child { border-bottom: 0; }
+  .q-text { font-weight: 600; font-size: 1.02rem; margin: 0 0 12px; }
+  .q-num { color: var(--muted); font-weight: 700; font-variant-numeric: tabular-nums; margin-right: 8px; }
+
+  .opts { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .opts label {
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    gap: 6px; text-align: center; cursor: pointer;
+    padding: 10px 4px; border: 1px solid var(--line); border-radius: 10px;
+    font-size: .72rem; color: var(--muted); line-height: 1.2;
+    transition: border-color .12s, background .12s, color .12s;
+  }
+  .opts input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .opts .dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid var(--muted); flex: none;
+  }
+  .opts label:hover { border-color: var(--accent); }
+  .opts input:checked + .dot { border-color: var(--accent); background: var(--accent); box-shadow: inset 0 0 0 3px var(--surface); }
+  .opts input:checked ~ .txt { color: var(--ink); font-weight: 700; }
+  .opts input:focus-visible + .dot { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .bar {
+    position: sticky; bottom: 0;
+    margin-top: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  .bar .prog { flex: 1 1 160px; min-width: 0; }
+  .bar .prog-track { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .bar .prog-fill { height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .2s; }
+  .bar .prog-label { font-size: .82rem; color: var(--muted); margin-top: 6px; }
+  button {
+    font: inherit; font-weight: 700;
+    padding: 12px 22px; border: 0; border-radius: 10px;
+    background: var(--accent); color: #fff; cursor: pointer;
+    transition: opacity .12s, transform .05s;
+  }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  button:not(:disabled):active { transform: translateY(1px); }
+  button.ghost { background: transparent; color: var(--accent); border: 1px solid var(--line); }
+
+  /* Results */
+  #results { scroll-margin-top: 20px; }
+  .result-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .result-head .primary-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; }
+  .tracks { display: grid; gap: 14px; margin: 20px 0 4px; }
+  .track-row { display: grid; grid-template-columns: 112px 1fr 44px; align-items: center; gap: 12px; }
+  .track-row .tname { font-weight: 700; font-size: .92rem; }
+  .track-row .tname small { display: block; font-weight: 400; color: var(--muted); font-size: .76rem; }
+  .track-bar { height: 14px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .track-bar i { display: block; height: 100%; border-radius: 99px; width: 0; transition: width .7s cubic-bezier(.2,.7,.2,1); }
+  .track-row .tval { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .t-d { color: var(--d); } .fill-d { background: var(--d); }
+  .t-i { color: var(--i); } .fill-i { background: var(--i); }
+  .t-s { color: var(--s); } .fill-s { background: var(--s); }
+  .t-c { color: var(--c); } .fill-c { background: var(--c); }
+
+  .style-detail { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .style-detail h3 { font-family: var(--font-display); font-size: 1.15rem; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+  .style-detail h3 .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+  .style-detail .tagline { color: var(--muted); margin: 0 0 12px; font-size: .95rem; }
+  .style-detail h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 14px 0 6px; }
+  .style-detail ul { margin: 0; padding-left: 20px; }
+  .style-detail li { margin-bottom: 4px; }
+
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .toast { font-size: .85rem; color: var(--s); font-weight: 700; align-self: center; }
+
+  footer { margin-top: 36px; color: var(--muted); font-size: .82rem; text-align: center; }
+
+  @media (max-width: 540px) {
+    .opts { grid-template-columns: 1fr; gap: 8px; }
+    .opts label { flex-direction: row; justify-content: flex-start; gap: 10px; text-align: left; font-size: .9rem; padding: 11px 13px; }
+    .track-row { grid-template-columns: 96px 1fr 38px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;600;700&display=swap">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Team Communication Workshop</p>
+    <h1>What's Your Communication Style?</h1>
+    <p class="lede">Before we work together as a team, it helps to know how each of us naturally communicates. This quick assessment — about five minutes — sorts your tendencies across four styles: Driver, Influencer, Supporter, and Analyst. There are no better or worse results and nothing is graded; the point is self-awareness, so answer honestly rather than how you think you should come across. When you're done you'll get your style and a short list of how teammates can work with you best — half of team friction is really two communication styles talking past each other, and naming it is the first step to fixing it. Nothing is saved or sent; your results stay on this screen.</p>
+  </header>
+
+  <div class="card">
+    <label class="name-field" for="student-name">Your name (optional — for your printout)</label>
+    <input type="text" id="student-name" placeholder="First, last" autocomplete="name">
+    <div class="scale-key">
+      <span><b>1</b> Not at all like me</span>
+      <span><b>2</b> Not much like me</span>
+      <span><b>3</b> Somewhat like me</span>
+      <span><b>4</b> A lot like me</span>
+      <span><b>5</b> Completely like me</span>
+    </div>
+  </div>
+
+  <form id="quiz" class="card" aria-label="Communication style statements"></form>
+
+  <div class="bar" role="region" aria-label="Progress">
+    <div class="prog">
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-label" id="prog-label">0 of 20 answered</div>
+    </div>
+    <button id="submit-btn" type="button" disabled>See my style</button>
+  </div>
+
+  <section id="results" class="card" hidden aria-live="polite"></section>
+
+  <footer>
+    DISC-style self-assessment · For classroom and team use · Scoring key is editable in the source
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---- Scoring key -------------------------------------------------------
+  // Each statement is positively keyed to exactly one dimension, so the score
+  // for a dimension is simply the sum of its five answers (range 5–25).
+  // Edit the text or move an item to a different dimension here.
+  var DIM = {
+    D: { key: "D", name: "Driver",      cls: "d", tagline: "Direct, decisive, and results-driven.",
+         traits: ["Focuses on goals and outcomes", "Decides quickly and acts", "Comfortable leading and taking risks", "Says what they think, plainly"],
+         tips: ["Be brief and get to the point", "Lead with the result or the bottom line", "Give them choices, not long explanations", "Don't take directness personally"] },
+    I: { key: "I", name: "Influencer",  cls: "i", tagline: "Outgoing, enthusiastic, and people-focused.",
+         traits: ["Energized by people and ideas", "Persuasive and optimistic", "Thinks out loud and brainstorms", "Builds rapport easily"],
+         tips: ["Be friendly and allow some social talk", "Recognize their ideas and energy", "Keep things upbeat and interactive", "Follow up in writing so details don't slip"] },
+    S: { key: "S", name: "Supporter",   cls: "s", tagline: "Calm, dependable, and cooperative.",
+         traits: ["Steady and even-tempered", "Loyal, patient teammate", "Values harmony and listening", "Prefers steady, predictable change"],
+         tips: ["Be warm, sincere, and patient", "Give them time to adjust to change", "Avoid pressure and sudden surprises", "Ask for their quiet input directly"] },
+    C: { key: "C", name: "Analyst",     cls: "c", tagline: "Precise, careful, and logical.",
+         traits: ["Attentive to detail and accuracy", "Thinks before acting", "Likes clear plans and standards", "Weighs options carefully"],
+         tips: ["Give details, data, and context", "Be accurate — they will check", "Allow time to think it over", "Don't rush them into a snap decision"] }
+  };
+
+  var STATEMENTS = [
+    { t: "I am comfortable taking charge of a group.", d: "D" },
+    { t: "I mix easily with people I've just met.", d: "I" },
+    { t: "I stay calm and even-tempered under pressure.", d: "S" },
+    { t: "I pay close attention to detail.", d: "C" },
+    { t: "I enjoy tackling big, difficult challenges.", d: "D" },
+    { t: "I enjoy talking in front of a group.", d: "I" },
+    { t: "I am a dependable team player.", d: "S" },
+    { t: "I analyze a situation carefully before acting.", d: "C" },
+    { t: "I make decisions quickly and stick to them.", d: "D" },
+    { t: "I stay enthusiastic and upbeat around others.", d: "I" },
+    { t: "I work to keep harmony within a group.", d: "S" },
+    { t: "I like to follow a clear plan or process.", d: "C" },
+    { t: "I am willing to take risks to get results.", d: "D" },
+    { t: "I make new friends easily.", d: "I" },
+    { t: "I am patient when others need more time.", d: "S" },
+    { t: "I double-check my work for accuracy.", d: "C" },
+    { t: "I am direct when I disagree with someone.", d: "D" },
+    { t: "I enjoy persuading and inspiring people.", d: "I" },
+    { t: "I am a careful, attentive listener.", d: "S" },
+    { t: "I prefer to weigh all the options before deciding.", d: "C" }
+  ];
+
+  var SCALE = ["Not at all", "Not much", "Somewhat", "A lot", "Completely"];
+  var TOTAL = STATEMENTS.length;
+
+  var form = document.getElementById("quiz");
+  var answers = {};
+
+  STATEMENTS.forEach(function (st, i) {
+    var q = document.createElement("div");
+    q.className = "q";
+    var p = document.createElement("p");
+    p.className = "q-text";
+    p.innerHTML = '<span class="q-num">' + (i + 1) + '</span>';
+    p.appendChild(document.createTextNode(st.t));
+    q.appendChild(p);
+
+    var opts = document.createElement("div");
+    opts.className = "opts";
+    opts.setAttribute("role", "radiogroup");
+    opts.setAttribute("aria-label", st.t);
+
+    for (var v = 1; v <= 5; v++) {
+      var lab = document.createElement("label");
+      var input = document.createElement("input");
+      input.type = "radio";
+      input.name = "q" + i;
+      input.value = String(v);
+      input.dataset.dim = st.d;
+      input.dataset.q = String(i);
+      var dot = document.createElement("span");
+      dot.className = "dot";
+      var txt = document.createElement("span");
+      txt.className = "txt";
+      txt.textContent = v + " · " + SCALE[v - 1];
+      lab.appendChild(input);
+      lab.appendChild(dot);
+      lab.appendChild(txt);
+      opts.appendChild(lab);
+    }
+    q.appendChild(opts);
+    form.appendChild(q);
+  });
+
+  var progFill = document.getElementById("prog-fill");
+  var progLabel = document.getElementById("prog-label");
+  var submitBtn = document.getElementById("submit-btn");
+
+  form.addEventListener("change", function (e) {
+    var el = e.target;
+    if (el && el.name && el.name.indexOf("q") === 0) {
+      answers[el.dataset.q] = { dim: el.dataset.dim, val: parseInt(el.value, 10) };
+      updateProgress();
+    }
+  });
+
+  function updateProgress() {
+    var n = Object.keys(answers).length;
+    progFill.style.width = (n / TOTAL * 100) + "%";
+    progLabel.textContent = n + " of " + TOTAL + " answered";
+    submitBtn.disabled = n < TOTAL;
+    submitBtn.textContent = n < TOTAL ? "Answer all " + TOTAL + " to see your style" : "See my style";
+  }
+
+  submitBtn.addEventListener("click", function () {
+    if (Object.keys(answers).length < TOTAL) {
+      var firstEmpty = null;
+      for (var i = 0; i < TOTAL; i++) { if (!answers[i]) { firstEmpty = i; break; } }
+      if (firstEmpty !== null) {
+        var node = form.children[firstEmpty];
+        node.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      return;
+    }
+    showResults();
+  });
+
+  function showResults() {
+    var score = { D: 0, I: 0, S: 0, C: 0 };
+    Object.keys(answers).forEach(function (k) { score[answers[k].dim] += answers[k].val; });
+
+    var order = ["D", "I", "S", "C"].sort(function (a, b) { return score[b] - score[a]; });
+    var top = score[order[0]];
+    var primaries = order.filter(function (d) { return score[d] === top; });
+
+    var name = (document.getElementById("student-name").value || "").trim();
+    var res = document.getElementById("results");
+
+    var html = "";
+    html += '<p class="eyebrow">Your result</p>';
+    html += '<div class="result-head">';
+    html += (name ? '<span style="color:var(--muted)">' + escapeHtml(name) + ' — </span>' : "");
+    var names = primaries.map(function (d) { return DIM[d].name; }).join(" + ");
+    html += '<span class="primary-name">' + names + '</span>';
+    html += '</div>';
+    html += '<p class="note" style="margin:0">' +
+      (primaries.length > 1
+        ? "You lead with a blend of styles — both show up strongly for you."
+        : "This is where you scored highest. Most people are a mix, so notice your next-strongest style too.") +
+      '</p>';
+
+    // tracks
+    html += '<div class="tracks">';
+    order.forEach(function (d) {
+      var pct = Math.round((score[d] - 5) / 20 * 100); // 5–25 -> 0–100
+      pct = Math.max(2, pct);
+      html += '<div class="track-row">' +
+        '<div class="tname t-' + DIM[d].cls + '">' + DIM[d].name + '<small>' + d + '</small></div>' +
+        '<div class="track-bar"><i class="fill-' + DIM[d].cls + '" data-w="' + pct + '"></i></div>' +
+        '<div class="tval">' + score[d] + '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+
+    // detail for each primary
+    primaries.forEach(function (d) {
+      var s = DIM[d];
+      html += '<div class="style-detail">';
+      html += '<h3><span class="swatch fill-' + s.cls + '"></span>' + s.name + ' <span style="color:var(--muted);font-weight:400;font-size:.9rem">(' + d + ')</span></h3>';
+      html += '<p class="tagline">' + s.tagline + '</p>';
+      html += '<h4>What this looks like</h4><ul>';
+      s.traits.forEach(function (t) { html += '<li>' + t + '</li>'; });
+      html += '</ul>';
+      html += '<h4>How teammates can work with you</h4><ul>';
+      s.tips.forEach(function (t) { html += '<li>' + t + '</li>'; });
+      html += '</ul>';
+      html += '</div>';
+    });
+
+    html += '<div class="result-actions">' +
+      '<button type="button" id="copy-btn">Copy my results</button>' +
+      '<button type="button" class="ghost" id="retake-btn">Start over</button>' +
+      '<button type="button" class="ghost" id="print-btn">Print / Save PDF</button>' +
+      '<span class="toast" id="copy-toast" hidden>Copied — paste it anywhere</span>' +
+      '</div>';
+
+    res.innerHTML = html;
+    res.hidden = false;
+
+    requestAnimationFrame(function () {
+      res.querySelectorAll(".track-bar i").forEach(function (el) { el.style.width = el.dataset.w + "%"; });
+    });
+    res.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    document.getElementById("retake-btn").addEventListener("click", function () {
+      answers = {};
+      form.querySelectorAll("input[type=radio]").forEach(function (r) { r.checked = false; });
+      res.hidden = true;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("print-btn").addEventListener("click", function () { window.print(); });
+
+    document.getElementById("copy-btn").addEventListener("click", function () {
+      var lines = [];
+      if (name) lines.push(name);
+      lines.push("Communication style: " + names);
+      lines.push("");
+      order.forEach(function (d) { lines.push(DIM[d].name + " (" + d + "): " + score[d] + "/25"); });
+      var text = lines.join("\n");
+      var toast = document.getElementById("copy-toast");
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { flash(toast); }).catch(function () { selectFallback(text, toast); });
+      } else {
+        selectFallback(text, toast);
+      }
+    });
+  }
+
+  function flash(toast) {
+    toast.hidden = false;
+    setTimeout(function () { toast.hidden = true; }, 2600);
+  }
+
+  function selectFallback(text, toast) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); flash(toast); } catch (e) { toast.textContent = "Select and copy manually"; toast.hidden = false; }
+    document.body.removeChild(ta);
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
