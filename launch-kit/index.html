@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Eyrie Collaboration Launch Kit</title>
+<style>
+  /* Layout: a sticky color-coded activity nav over a single reading column;
+     dark phase-divider bands break the two phases; worked examples in a marker
+     hand; eight activity hues code every number, tab, and example. */
+  :root {
+    --bg: #f6f3ee;
+    --surface: #ffffff;
+    --ink: #221f22;
+    --muted: #5f5a57;
+    --line: #e4ded4;
+    --band: #211f22;
+    --band-ink: #f4f1ea;
+    --brand: #7e1f2e;      /* NCCU maroon */
+    --brand-2: #a8324a;
+    --a1: #c05a2b;  /* Communication */
+    --a2: #2f7e78;  /* Thinking */
+    --a3: #8e4585;  /* Insights */
+    --a4: #5b8c3e;  /* Goals */
+    --a5: #4e63a6;  /* Team Insights */
+    --a6: #c0392b;  /* Roles */
+    --a7: #b0417e;  /* Ground Rules */
+    --a8: #2e8ca6;  /* Road Map */
+    --shadow: 0 1px 2px rgba(34,31,34,.06), 0 10px 30px rgba(34,31,34,.07);
+    --font-display: "Oswald", "Arial Narrow", system-ui, sans-serif;
+    --font-body: "Public Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --font-hand: "Caveat", "Comic Sans MS", cursive;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16151a; --surface: #201e24; --ink: #ece7e4; --muted: #a39d99;
+      --line: #322e35; --band: #0f0e12; --band-ink: #f1ece6;
+      --brand: #e08497; --brand-2: #e8a0af;
+      --a1: #e08351; --a2: #4faaa2; --a3: #c07ab6; --a4: #85c062;
+      --a5: #8291d6; --a6: #e36a5c; --a7: #d976ac; --a8: #55b6d2;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.45);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16151a; --surface: #201e24; --ink: #ece7e4; --muted: #a39d99;
+    --line: #322e35; --band: #0f0e12; --band-ink: #f1ece6;
+    --brand: #e08497; --brand-2: #e8a0af;
+    --a1: #e08351; --a2: #4faaa2; --a3: #c07ab6; --a4: #85c062;
+    --a5: #8291d6; --a6: #e36a5c; --a7: #d976ac; --a8: #55b6d2;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 34px rgba(0,0,0,.45);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  /* Sticky nav */
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--surface); z-index: 21; }
+  .nav-inner {
+    max-width: 920px; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 10px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .brandmark { display: flex; align-items: center; gap: 9px; flex: none; text-decoration: none; color: inherit; }
+  .brandmark svg { width: 24px; height: 24px; flex: none; }
+  .brandmark b { font-family: var(--font-display); font-weight: 600; font-size: .98rem; letter-spacing: .02em; text-transform: uppercase; color: var(--brand); white-space: nowrap; }
+  .chips { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin-left: auto; padding: 2px; }
+  .chips::-webkit-scrollbar { display: none; }
+  .chips a { flex: none; width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; font-family: var(--font-display); font-weight: 600; font-size: .9rem; text-decoration: none; color: #fff; opacity: .55; transition: opacity .15s, transform .1s; }
+  .chips a:hover { opacity: 1; }
+  .chips a.on { opacity: 1; transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,.18); }
+  .c1 { background: var(--a1); } .c2 { background: var(--a2); } .c3 { background: var(--a3); } .c4 { background: var(--a4); }
+  .c5 { background: var(--a5); } .c6 { background: var(--a6); } .c7 { background: var(--a7); } .c8 { background: var(--a8); }
+
+  .wrap {
+    max-width: 920px; margin: 0 auto;
+    padding-left: max(18px, env(safe-area-inset-left, 0px));
+    padding-right: max(18px, env(safe-area-inset-right, 0px));
+    padding-block: 0 80px;
+  }
+
+  /* Masthead */
+  .hero { padding-block: 54px 10px; }
+  .kicker { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .16em; font-size: .8rem; font-weight: 500; color: var(--brand); margin: 0 0 14px; }
+  h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(2.3rem, 7vw, 3.8rem); line-height: .98; letter-spacing: .005em; text-transform: uppercase; text-wrap: balance; margin: 0 0 18px; }
+  h1 .thin { display: block; font-weight: 300; color: var(--muted); font-size: clamp(1.1rem, 3.4vw, 1.5rem); letter-spacing: .02em; margin-top: 10px; }
+  .lede { font-size: 1.1rem; color: var(--muted); max-width: 64ch; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .section-title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .02em; font-weight: 600; }
+
+  /* Phase overview */
+  .phases { display: grid; gap: 16px; margin-top: 34px; }
+  @media (min-width: 680px) { .phases { grid-template-columns: 1fr 1fr; } }
+  .phase { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow); padding: 20px; }
+  .phase .ph-head { display: flex; align-items: baseline; gap: 10px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 12px; }
+  .phase .ph-head h3 { font-family: var(--font-display); text-transform: uppercase; font-size: 1.1rem; font-weight: 600; margin: 0; }
+  .phase .ph-time { margin-left: auto; font-size: .8rem; font-weight: 700; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
+  .phase ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .phase li { display: flex; align-items: center; gap: 11px; }
+  .phase li .n { width: 26px; height: 26px; border-radius: 7px; color: #fff; font-family: var(--font-display); font-weight: 600; display: grid; place-items: center; flex: none; font-size: .9rem; }
+  .phase li a { color: inherit; text-decoration: none; font-weight: 600; }
+  .phase li a:hover { color: var(--brand); }
+
+  /* Phase divider band */
+  .band { background: var(--band); color: var(--band-ink); border-radius: 18px; margin-top: 40px; padding: 30px 26px; position: relative; overflow: hidden; }
+  .band .band-eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; font-size: 1.05rem; }
+  .band .band-eyebrow .time { font-size: .78rem; border: 1px solid rgba(244,241,234,.5); border-radius: 99px; padding: 3px 10px; letter-spacing: .04em; }
+  .band p { color: rgba(244,241,234,.8); margin: 12px 0 0; max-width: 62ch; }
+  .band .glyph { position: absolute; right: -14px; top: -14px; width: 120px; height: 120px; opacity: .14; }
+
+  /* Activity */
+  .activity { margin-top: 30px; scroll-margin-top: 70px; }
+  .act-head { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; }
+  .act-num { width: 62px; height: 72px; border-radius: 12px; color: #fff; font-family: var(--font-display); font-weight: 700; font-size: 2.5rem; display: grid; place-items: center; box-shadow: var(--shadow); }
+  .act-titles h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 600; font-size: 1.5rem; line-height: 1.05; margin: 6px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .act-titles h2 .time { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: .74rem; font-weight: 700; color: var(--muted); border: 1px solid var(--line); border-radius: 99px; padding: 3px 10px; white-space: nowrap; }
+  .act-desc { color: var(--muted); margin: 12px 0 0; max-width: 66ch; }
+  .act-body { margin-top: 16px; }
+
+  .steps-label { display: inline-block; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .08em; font-size: .72rem; font-weight: 600; color: #fff; padding: 3px 10px; border-radius: 5px; }
+  .steps { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .steps li { display: flex; gap: 9px; }
+  .steps li::before { content: "+"; font-weight: 800; }
+  .steps li a { color: var(--brand); font-weight: 600; }
+
+  .a1 .act-num, .a1 .steps-label { background: var(--a1); } .a1 .steps li::before { color: var(--a1); }
+  .a2 .act-num, .a2 .steps-label { background: var(--a2); } .a2 .steps li::before { color: var(--a2); }
+  .a3 .act-num, .a3 .steps-label { background: var(--a3); } .a3 .steps li::before { color: var(--a3); }
+  .a4 .act-num, .a4 .steps-label { background: var(--a4); } .a4 .steps li::before { color: var(--a4); }
+  .a5 .act-num, .a5 .steps-label { background: var(--a5); } .a5 .steps li::before { color: var(--a5); }
+  .a6 .act-num, .a6 .steps-label { background: var(--a6); } .a6 .steps li::before { color: var(--a6); }
+  .a7 .act-num, .a7 .steps-label { background: var(--a7); } .a7 .steps li::before { color: var(--a7); }
+  .a8 .act-num, .a8 .steps-label { background: var(--a8); } .a8 .steps li::before { color: var(--a8); }
+
+  /* Quiz button */
+  .quiz-btn { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; text-decoration: none; color: #fff; font-weight: 700; padding: 13px 20px; border-radius: 11px; box-shadow: var(--shadow); transition: transform .06s, filter .12s; }
+  .quiz-btn:hover { filter: brightness(1.05); }
+  .quiz-btn:active { transform: translateY(1px); }
+  .quiz-btn svg { width: 18px; height: 18px; }
+  .a1 .quiz-btn { background: var(--a1); } .a2 .quiz-btn { background: var(--a2); }
+
+  /* Worked example card */
+  .example { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); overflow: hidden; }
+  .example .ex-tab { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .1em; font-size: .72rem; font-weight: 600; color: var(--muted); padding: 9px 16px; border-bottom: 1px dashed var(--line); display: flex; align-items: center; gap: 8px; }
+  .example .ex-body { padding: 18px 20px; font-family: var(--font-hand); font-size: 1.32rem; line-height: 1.5; }
+  .example .ex-body .lbl { font-weight: 700; color: var(--brand); }
+  .ex-cols { display: grid; gap: 18px; }
+  @media (min-width: 620px) { .ex-cols { grid-template-columns: 1fr 1fr; } }
+  .ex-body ul { margin: 4px 0 0; padding-left: 22px; }
+  .roles-grid { display: grid; gap: 14px 24px; }
+  @media (min-width: 620px) { .roles-grid { grid-template-columns: 1fr 1fr; } }
+  .role b { color: var(--brand); }
+
+  /* Fill-in worksheet */
+  .sheet { margin-top: 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: var(--shadow); padding: 20px; }
+  .sheet h4 { margin: 0 0 4px; font-family: var(--font-display); text-transform: uppercase; letter-spacing: .02em; font-size: 1rem; font-weight: 600; }
+  .sheet .hint { color: var(--muted); font-size: .9rem; margin: 0 0 14px; }
+  .field { display: grid; gap: 5px; margin-bottom: 13px; }
+  .field label { font-size: .82rem; font-weight: 700; color: var(--ink); }
+  .field label span { font-weight: 400; color: var(--muted); }
+  .field input, .field textarea { font: inherit; width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink); }
+  .field textarea { resize: vertical; min-height: 64px; }
+  .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+  .field-2 { display: grid; gap: 13px; }
+  @media (min-width: 560px) { .field-2 { grid-template-columns: 1fr 1fr; } }
+
+  /* Availability grid */
+  .avail { margin-top: 6px; overflow-x: auto; }
+  table.grid { border-collapse: collapse; width: 100%; min-width: 440px; }
+  table.grid th, table.grid td { border: 1px solid var(--line); text-align: center; }
+  table.grid th { font-size: .72rem; font-weight: 700; color: var(--muted); padding: 7px 4px; }
+  table.grid td.rowlbl { font-size: .72rem; font-weight: 700; color: var(--muted); white-space: nowrap; padding: 0 8px; text-align: right; }
+  table.grid td.cell { padding: 0; }
+  table.grid td.cell button { width: 100%; height: 38px; border: 0; background: transparent; cursor: pointer; font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--a3); }
+  table.grid td.cell button[aria-pressed="true"] { background: color-mix(in srgb, var(--a3) 20%, transparent); }
+  .avail-note { font-size: .82rem; color: var(--muted); margin: 8px 0 0; }
+
+  /* Prompt list for team worksheets */
+  .prompts { margin: 0 0 14px; padding-left: 20px; color: var(--muted); }
+  .prompts li { margin-bottom: 4px; }
+
+  /* Closers */
+  .closer { margin-top: 44px; }
+  .closer h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 600; font-size: 1.4rem; color: var(--brand); display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px; }
+  .closer h2::before, .closer h2::after { content: ""; color: var(--muted); font-weight: 300; }
+  .closer p { color: var(--muted); max-width: 66ch; }
+  .closer p b { color: var(--ink); }
+  .note { font-size: .85rem; color: var(--muted); background: color-mix(in srgb, var(--brand) 8%, transparent); border-left: 3px solid var(--brand); border-radius: 0 8px 8px 0; padding: 10px 14px; margin-top: 14px; }
+  .finish { background: color-mix(in srgb, var(--brand) 7%, var(--surface)); border: 1px solid var(--line); border-radius: 16px; padding: 24px; box-shadow: var(--shadow); }
+  .finish h2 { margin-top: 0; }
+  .save-actions { margin: 16px 0 4px; }
+  button.tool.big { font-size: 1.02rem; padding: 14px 24px; border-radius: 11px; }
+  .hint-line { font-size: .9rem; color: var(--muted); margin: 8px 0 0; }
+
+  .toolbar { position: sticky; bottom: 0; z-index: 15; margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); }
+  .toolbar .saved { font-size: .82rem; color: var(--muted); }
+  .toolbar .saved b { color: var(--a4); }
+  button.tool { font: inherit; font-weight: 700; padding: 10px 16px; border: 1px solid var(--line); border-radius: 9px; background: transparent; color: var(--brand); cursor: pointer; }
+  button.tool.solid { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+  footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+  footer a { color: var(--brand); }
+
+  @media (max-width: 520px) {
+    .act-head { grid-template-columns: 1fr; }
+    .act-num { width: 54px; height: 54px; font-size: 2rem; }
+    .brandmark b { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  html { scroll-behavior: smooth; }
+  @media print {
+    .nav, .toolbar, .finish { display: none !important; }
+    .band, .phase, .sheet, .example, .activity, .closer { break-inside: avoid; }
+    body { background: #fff; }
+    .quiz-btn { color: #000 !important; border: 1px solid #999; box-shadow: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .7em; color: #666; word-break: break-all; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Public+Sans:wght@400;600;700&family=Caveat:wght@500;600;700&display=swap">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brandmark" href="#top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--brand)">
+        <path d="M12 2 C7 7 4 10 4 14 a8 8 0 0 0 16 0 c0-4-3-7-8-12z" stroke-linejoin="round"/>
+        <path d="M12 22 V12 M12 15 l4-3 M12 17 l-4-3" stroke-linecap="round"/>
+      </svg>
+      <b>Eyrie Launch Kit</b>
+    </a>
+    <div class="chips" id="chips">
+      <a class="c1" href="#a1">1</a><a class="c2" href="#a2">2</a><a class="c3" href="#a3">3</a><a class="c4" href="#a4">4</a>
+      <a class="c5" href="#a5">5</a><a class="c6" href="#a6">6</a><a class="c7" href="#a7">7</a><a class="c8" href="#a8">8</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+
+  <!-- Masthead -->
+  <header class="hero">
+    <p class="kicker">NCCU Eyrie Initiative · Community Design Center</p>
+    <h1>Collaboration<br>Launch Kit
+      <span class="thin">A shared start for teams of students, partner institutions, and the communities we design with.</span>
+    </h1>
+    <p class="lede">The strongest community design happens when everyone builds on each other's strengths from day one. This kit walks your team — <b>NCCU students, collaborators from partner schools and institutions, and the community partners and clients you're designing with</b> — through a shared start: understanding how each of you communicates and thinks, then setting goals, roles, ground rules, and a timeline together. Work through it before the design work begins, and you'll move faster, communicate better, and build the trust good community design depends on.</p>
+  </header>
+
+  <!-- Overview -->
+  <section style="margin-top:34px">
+    <p class="section-title" style="color:var(--muted); font-size:.82rem; letter-spacing:.14em; margin:0 0 4px">Steps &amp; activities</p>
+    <p style="color:var(--muted); margin:0; max-width:60ch">Follow the two phases in order. Do the first three on your own, then work through the rest together as a team.</p>
+    <div class="phases">
+      <div class="phase">
+        <div class="ph-head"><h3>Individual</h3><span class="ph-time">~30 min · on your own</span></div>
+        <ol>
+          <li><span class="n c1">1</span><a href="#a1">Communication Style</a></li>
+          <li><span class="n c2">2</span><a href="#a2">Thinking Style</a></li>
+          <li><span class="n c3">3</span><a href="#a3">Individual Insights</a></li>
+        </ol>
+      </div>
+      <div class="phase">
+        <div class="ph-head"><h3>Team</h3><span class="ph-time">~2.5 hrs · together</span></div>
+        <ol>
+          <li><span class="n c4">4</span><a href="#a4">Goals &amp; Deliverables</a></li>
+          <li><span class="n c5">5</span><a href="#a5">Team Insights</a></li>
+          <li><span class="n c6">6</span><a href="#a6">Roles &amp; Responsibilities</a></li>
+          <li><span class="n c7">7</span><a href="#a7">Ground Rules</a></li>
+          <li><span class="n c8">8</span><a href="#a8">Project Road Map</a></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 1 BAND -->
+  <div class="band">
+    <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <div class="band-eyebrow">Individual Activities <span class="time">30 MIN</span></div>
+    <p>To start, explore how you communicate and think on your own. Find a quiet moment to take the two assessments, then gather a few details about yourself to share with your team in the group activities.</p>
+  </div>
+
+  <!-- Activity 1 -->
+  <section class="activity a1" id="a1">
+    <div class="act-head">
+      <div class="act-num">1</div>
+      <div class="act-titles">
+        <h2>Communication Style <span class="time">10 min</span></h2>
+        <p class="act-desc">How you listen, speak, and share work shapes every collaboration — and mixed teams of students, faculty, and community partners bring very different habits to the table. This short self-assessment names your communication style so your team can recognize and work with each other's differences instead of talking past them.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <span class="steps-label">Steps</span>
+      <ul class="steps">
+        <li>Open the <a href="communication-style-finder.html" target="_blank" rel="noopener">Communication Style Finder</a> and take it (about 5 minutes).</li>
+        <li>Note your style and the "how to work with me" tips it gives you.</li>
+        <li>Bring your result to <a href="#a3">Activity 3</a> and share it with the team in <a href="#a5">Activity 5</a>.</li>
+      </ul>
+      <a class="quiz-btn" href="communication-style-finder.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Take the Communication Style Finder
+      </a>
+    </div>
+  </section>
+
+  <!-- Activity 2 -->
+  <section class="activity a2" id="a2">
+    <div class="act-head">
+      <div class="act-num">2</div>
+      <div class="act-titles">
+        <h2>Thinking Style <span class="time">10 min</span></h2>
+        <p class="act-desc">People don't just communicate differently — they think differently. One teammate wants the big picture, another wants the facts, another wants to try something and see what works. This assessment maps how you approach ideas and problems, so your team can turn those different lenses into a strength instead of a source of friction.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <span class="steps-label">Steps</span>
+      <ul class="steps">
+        <li>Open the <a href="thinking-style-finder.html" target="_blank" rel="noopener">Thinking Style Finder</a> and rank your way through it (about 10 minutes).</li>
+        <li>Note your top style(s) and what they say about how you work.</li>
+        <li>Bring your result to <a href="#a3">Activity 3</a> and share it in <a href="#a5">Activity 5</a>.</li>
+      </ul>
+      <a class="quiz-btn" href="thinking-style-finder.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Take the Thinking Style Finder
+      </a>
+    </div>
+  </section>
+
+  <!-- Activity 3 -->
+  <section class="activity a3" id="a3">
+    <div class="act-head">
+      <div class="act-num">3</div>
+      <div class="act-titles">
+        <h2>Individual Insights <span class="time">10 min</span></h2>
+        <p class="act-desc">Teams that collaborate well build on each member's strengths — and on mixed teams, that means knowing who's in the room: which school or organization they're from, what they bring, and when they're free. Fill in your card below; you'll share it with the team in Activity 5. Your entries save in this browser.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="sheet">
+        <h4>Your insight card</h4>
+        <p class="hint">Written for a mixed team — answer the parts that fit your role.</p>
+        <div class="field-2">
+          <div class="field"><label for="i_name">Name</label><input id="i_name" data-save type="text" autocomplete="name"></div>
+          <div class="field"><label for="i_role">Role on this project <span>(student, partner-school collaborator, community partner/client, faculty/advisor…)</span></label><input id="i_role" data-save type="text"></div>
+        </div>
+        <div class="field-2">
+          <div class="field"><label for="i_affil">School, organization, or department</label><input id="i_affil" data-save type="text"></div>
+          <div class="field"><label for="i_from">Where you're from / your tie to this community</label><input id="i_from" data-save type="text"></div>
+        </div>
+        <div class="field-2">
+          <div class="field"><label for="i_field">Field, program, or focus</label><input id="i_field" data-save type="text"></div>
+          <div class="field"><label for="i_fun">A fun fact about you</label><input id="i_fun" data-save type="text"></div>
+        </div>
+        <div class="field-2">
+          <div class="field"><label for="i_comm">Your communication style <span>(from Activity 1)</span></label><input id="i_comm" data-save type="text"></div>
+          <div class="field"><label for="i_think">Your thinking style <span>(from Activity 2)</span></label><input id="i_think" data-save type="text"></div>
+        </div>
+        <div class="field"><label for="i_exp">Experience you bring <span>(design, community, technical, lived experience…)</span></label><textarea id="i_exp" data-save></textarea></div>
+        <div class="field"><label for="i_super">Your "superpowers" <span>— skills outside your main role that could help the team</span></label><textarea id="i_super" data-save></textarea></div>
+      </div>
+
+      <div class="sheet">
+        <h4>Your availability</h4>
+        <p class="hint">Being part of a collaboration is an investment of your knowledge, skills, <em>and</em> time. Add your contact info, then tap the blocks when you're <b>not</b> available.</p>
+        <div class="field-2">
+          <div class="field"><label for="a_name">Name</label><input id="a_name" data-save type="text"></div>
+          <div class="field"><label for="a_phone">Phone</label><input id="a_phone" data-save type="text" inputmode="tel"></div>
+        </div>
+        <div class="field-2">
+          <div class="field"><label for="a_email">Email</label><input id="a_email" data-save type="text" inputmode="email"></div>
+          <div class="field"><label for="a_site">Portfolio / website <span>(optional)</span></label><input id="a_site" data-save type="text"></div>
+        </div>
+        <div class="avail">
+          <table class="grid" id="availgrid" aria-label="Weekly availability — mark busy times">
+            <thead><tr><th></th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="avail-note">An "X" means you're busy. Blank means you're free to meet.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 2 BAND -->
+  <div class="band">
+    <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3 2.7-5 6-5M22 20c0-3-2.7-5-6-5M9 20c0-2.5 1.3-4 3-4s3 1.5 3 4"/></svg>
+    <div class="band-eyebrow">Team Activities <span class="time">2.5 HRS</span></div>
+    <p>Now that everyone has gathered their insights and knows a little about how they communicate and think, it's time to collaborate. Work through the rest together — on a whiteboard, a shared doc, or right here — and keep a master copy for your team.</p>
+  </div>
+
+  <!-- Activity 4 -->
+  <section class="activity a4" id="a4">
+    <div class="act-head">
+      <div class="act-num">4</div>
+      <div class="act-titles">
+        <h2>Goals &amp; Deliverables <span class="time">20 min</span></h2>
+        <p class="act-desc">Every project carries its own challenges. Your team's ability to pool strengths and solve problems creatively is what moves it forward. Agree on one clear goal and the deliverables that will get you there — and make sure the community partner's priorities are in the goal, not just the team's.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="example">
+        <div class="ex-tab">Example · Briggs Community Garden (with Duke)</div>
+        <div class="ex-body ex-cols">
+          <div><span class="lbl">Goal:</span><br>Design a welcoming, low-maintenance community garden at Briggs that neighbors of all ages can plant, gather, and learn in — shaped by what residents say they want.</div>
+          <div><span class="lbl">Deliverables:</span>
+            <ul>
+              <li>Site research &amp; community input summary</li>
+              <li>Concept plan &amp; planting design</li>
+              <li>Materials / plant list &amp; budget</li>
+              <li>Final presentation to partners</li>
+              <li>Process book</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sheet">
+        <h4>Your goal &amp; deliverables</h4>
+        <ul class="prompts">
+          <li>In one or two sentences, state your project goal.</li>
+          <li>List what your team will make or hand off.</li>
+        </ul>
+        <div class="field"><label for="g_goal">Project goal</label><textarea id="g_goal" data-save></textarea></div>
+        <div class="field"><label for="g_deliv">Deliverables</label><textarea id="g_deliv" data-save></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity 5 -->
+  <section class="activity a5" id="a5">
+    <div class="act-head">
+      <div class="act-num">5</div>
+      <div class="act-titles">
+        <h2>Team Insights <span class="time">20 min</span></h2>
+        <p class="act-desc">Everyone brings distinct backgrounds, knowledge, and skills — and on a cross-institution team, different calendars and obligations too. Sharing your insight cards and your availability is the first step to a project you can actually manage together.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <span class="steps-label">Steps</span>
+      <ul class="steps">
+        <li>Read your Activity 3 insight cards together and get to know each other.</li>
+        <li>Share your communication and thinking styles — and one way each of you likes to be worked with.</li>
+        <li>Compare availability grids to find common meeting times.</li>
+        <li>Collect everyone's contact info in one shared place.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Activity 6 -->
+  <section class="activity a6" id="a6">
+    <div class="act-head">
+      <div class="act-num">6</div>
+      <div class="act-titles">
+        <h2>Roles &amp; Responsibilities <span class="time">20 min</span></h2>
+        <p class="act-desc">Clear roles keep a project moving and make sure the community partner's voice has a seat at the table. Decide which roles your project needs, what each one takes, and who's best suited — drawing on the strengths you just shared.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="example">
+        <div class="ex-tab">Example roles for a community design project</div>
+        <div class="ex-body">
+          <div class="roles-grid">
+            <div class="role"><b>Project Coordinator</b> — keeps the schedule, agendas, and hand-offs on track. <em>Takes organization and follow-through.</em></div>
+            <div class="role"><b>Community Liaison</b> — keeps residents' and the client's voice central; sets up input sessions. <em>Takes listening and local trust.</em></div>
+            <div class="role"><b>Research &amp; Site Lead</b> — gathers site, precedent, and community data. <em>Takes curiosity and rigor.</em></div>
+            <div class="role"><b>Design &amp; Production Lead</b> — drives drawings, models, and the look of deliverables. <em>Takes design chops and craft.</em></div>
+            <div class="role"><b>Documentation &amp; Comms</b> — captures the process and handles outside communication. <em>Takes clear writing and tidy files.</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="sheet">
+        <h4>Your roles</h4>
+        <ul class="prompts">
+          <li>Which roles does your project need? What does each one take?</li>
+          <li>Who's the best fit — and does the partner/client have a role too?</li>
+        </ul>
+        <div class="field"><label for="r_roles">Roles, what they take, and who holds them</label><textarea id="r_roles" data-save style="min-height:120px"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity 7 -->
+  <section class="activity a7" id="a7">
+    <div class="act-head">
+      <div class="act-num">7</div>
+      <div class="act-titles">
+        <h2>Ground Rules <span class="time">20 min</span></h2>
+        <p class="act-desc">Ground rules set shared expectations — especially when teammates come from different schools, cultures, and working norms. Agree on how you'll communicate, share files, make decisions, and hold each other accountable.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="example">
+        <div class="ex-tab">Example</div>
+        <div class="ex-body">
+          <div><span class="lbl">Communication:</span> Group text for quick things, email for official, shared channel for the rest.</div>
+          <div><span class="lbl">File management:</span> One shared Drive/Dropbox folder, named files, single source of truth.</div>
+          <div><span class="lbl">Meetings &amp; prep:</span> Weekly check-in, agenda ahead of time, come prepared.</div>
+          <div><span class="lbl">Decision making:</span> Consensus where we can; the lead decides if we're stuck; the community partner has the final say on community priorities.</div>
+          <div><span class="lbl">Accountability:</span> If you can't deliver, tell the team early so we can adjust.</div>
+        </div>
+      </div>
+      <div class="sheet">
+        <h4>Your ground rules</h4>
+        <ul class="prompts">
+          <li>How will your team communicate, and share files and resources?</li>
+          <li>How will you make decisions — and where does the client's voice lead?</li>
+          <li>What are your attendance and prep expectations, and how will you handle it when someone falls behind?</li>
+        </ul>
+        <div class="field"><label for="gr_rules">Your rules</label><textarea id="gr_rules" data-save style="min-height:120px"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Activity 8 -->
+  <section class="activity a8" id="a8">
+    <div class="act-head">
+      <div class="act-num">8</div>
+      <div class="act-titles">
+        <h2>Project Road Map <span class="time">40 min</span></h2>
+        <p class="act-desc">Mapping your phases gives the whole team — and your partners — a shared picture of the work over time. Lay out your deliverables from Activity 4 across the weeks you have, and build in time for community input and review. Adapt it as you go.</p>
+      </div>
+    </div>
+    <div class="act-body">
+      <div class="example">
+        <div class="ex-tab">Example timeline</div>
+        <div class="ex-body" style="font-family:var(--font-body); font-size:1rem">
+          <div style="display:grid; gap:9px">
+            <div style="display:grid; grid-template-columns:150px 1fr; align-items:center; gap:10px"><span style="font-family:var(--font-hand); font-size:1.2rem">Research &amp; input</span><span style="height:10px; border-radius:99px; background:var(--a8); width:40%"></span></div>
+            <div style="display:grid; grid-template-columns:150px 1fr; align-items:center; gap:10px"><span style="font-family:var(--font-hand); font-size:1.2rem">Concept design</span><span style="height:10px; border-radius:99px; background:var(--a8); width:55%; margin-left:25%"></span></div>
+            <div style="display:grid; grid-template-columns:150px 1fr; align-items:center; gap:10px"><span style="font-family:var(--font-hand); font-size:1.2rem">Plans &amp; renderings</span><span style="height:10px; border-radius:99px; background:var(--a8); width:50%; margin-left:45%"></span></div>
+            <div style="display:grid; grid-template-columns:150px 1fr; align-items:center; gap:10px"><span style="font-family:var(--font-hand); font-size:1.2rem">Partner review</span><span style="height:10px; border-radius:99px; background:var(--a8); width:12%; margin-left:70%"></span></div>
+            <div style="display:grid; grid-template-columns:150px 1fr; align-items:center; gap:10px"><span style="font-family:var(--font-hand); font-size:1.2rem">Final &amp; process book</span><span style="height:10px; border-radius:99px; background:var(--a8); width:30%; margin-left:70%"></span></div>
+          </div>
+          <div style="color:var(--muted); font-size:.85rem; margin-top:10px">Weeks 1 → 5 · ○ start · ✕ due</div>
+        </div>
+      </div>
+      <div class="sheet">
+        <h4>Your road map</h4>
+        <ul class="prompts">
+          <li>What are your start and end dates? Will you measure in days or weeks?</li>
+          <li>List your deliverables from Activity 4 and plot each one's start and due dates.</li>
+          <li>Build in checkpoints for community input and partner review.</li>
+        </ul>
+        <div class="field"><label for="rm_map">Phases, dates, and milestones</label><textarea id="rm_map" data-save style="min-height:120px"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <span class="saved" id="savedmsg">Saved on this device only — keep a copy below.</span>
+    <span style="margin-left:auto"></span>
+    <button class="tool" id="clear-btn" type="button">Clear my entries</button>
+  </div>
+
+  <!-- Save & share -->
+  <section class="closer finish" id="finish">
+    <h2>[ Save &amp; Share Your Work ]</h2>
+    <p>You're at the finish line. Everything you typed lives only in <b>this browser, on this device</b> — it isn't sent anywhere and your teammates can't see it. So before you move on, <b>save your filled-in kit as a PDF</b> and send it to your team to use in the group activities.</p>
+    <div id="save-actions" class="save-actions"></div>
+    <p class="hint-line">Fill in your parts above first. Then, in the Print dialog, set the destination to <b>"Save as PDF."</b></p>
+  </section>
+
+  <!-- Next steps -->
+  <section class="closer">
+    <h2>[ Next Steps ]</h2>
+    <p>Pick someone to collect and host your team's outcomes — insight cards, goal and deliverables, roles, ground rules, and road map — in the shared workspace you chose in <b>Activity 7</b>. That becomes your project's starting point. Come back to this kit as the work evolves: roles shift, timelines move, and new partners join. By finishing the launch kit, your team is ready for the collaborative work ahead. Good luck, and enjoy building something real together.</p>
+  </section>
+
+  <!-- Project support -->
+  <section class="closer">
+    <h2>[ Project Support ]</h2>
+    <p>Questions will come up during a collaboration — that's normal. Two resources are here to help: your <b>Eyrie Design Center studio lead</b>, who guides the design work and team process, and your <b>community partnership liaison</b>, who coordinates the relationship between your team and the partner institution or client. Reach out early and often; they're here to help you navigate communication, deliverables, and the realities of working with a real community.</p>
+    <div class="note">Replace this with your Center's actual support contacts — e.g. <b>Studio lead:</b> [name · email] · <b>Partnership liaison:</b> [name · email].</div>
+  </section>
+
+  <!-- About -->
+  <section class="closer">
+    <h2>[ About the Eyrie Initiative ]</h2>
+    <p>The <b>Eyrie Initiative Community Design Center</b> at North Carolina Central University is a student-driven design practice that partners with neighborhoods, institutions, and organizations on real community design projects — from public spaces and gardens to maps, graphics, and the built environment. Students work alongside community members and collaborators from partner schools to turn local priorities into design that gets built and used.</p>
+    <div class="note">This is placeholder copy — swap in the Center's official mission statement, leadership, and any program details before you share the kit.</div>
+  </section>
+
+  <footer>
+    <p><b>Frameworks behind this kit.</b> The two self-assessments draw on widely used models of collaboration: a four-part communication-styles framework (commonly called DISC) and a five-part model of thinking styles. Both are original instruments written for the Eyrie Initiative, not copies of any proprietary assessment. Modeled on the collaboration launch-kit format; adapted for community design and cross-institution teams.</p>
+    <p style="margin-top:10px">NCCU Eyrie Initiative · Community Design Center · Collaboration Launch Kit — a starter you can edit and make your own.</p>
+  </footer>
+
+</div>
+
+<script>
+window.__SHOW_PRINT__ = true;
+</script>
+<script>
+(function () {
+  "use strict";
+  var NS = "eyrie-kit:";
+  var store = {
+    get: function (k) { try { return localStorage.getItem(NS + k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem(NS + k, v); } catch (e) {} },
+    del: function (k) { try { localStorage.removeItem(NS + k); } catch (e) {} }
+  };
+
+  // Build availability grid
+  var grid = document.querySelector("#availgrid tbody");
+  var rows = ["8–11 am", "11 am–2 pm", "2–5 pm", "5–8 pm", "8–11 pm"];
+  rows.forEach(function (label, ri) {
+    var tr = document.createElement("tr");
+    var th = document.createElement("td");
+    th.className = "rowlbl"; th.textContent = label;
+    tr.appendChild(th);
+    for (var ci = 0; ci < 7; ci++) {
+      var td = document.createElement("td");
+      td.className = "cell";
+      var b = document.createElement("button");
+      b.type = "button";
+      b.dataset.save = "";
+      b.id = "av_" + ri + "_" + ci;
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", "Toggle busy");
+      td.appendChild(b);
+      tr.appendChild(td);
+    }
+    grid.appendChild(tr);
+  });
+
+  var savedMsg = document.getElementById("savedmsg");
+  var flashTimer = null;
+  function flashSaved() {
+    savedMsg.innerHTML = '<b style="color:var(--a4)">✓ Saved</b>';
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function () { savedMsg.textContent = "Saved on this device only — keep a copy below."; }, 1500);
+  }
+
+  // Restore + wire text fields
+  var fields = document.querySelectorAll("input[data-save], textarea[data-save]");
+  fields.forEach(function (el) {
+    var v = store.get(el.id);
+    if (v !== null) el.value = v;
+    el.addEventListener("input", function () { store.set(el.id, el.value); flashSaved(); });
+  });
+
+  // Restore + wire grid buttons
+  var cells = document.querySelectorAll("button[data-save]");
+  cells.forEach(function (el) {
+    if (store.get(el.id) === "1") el.setAttribute("aria-pressed", "true");
+    el.addEventListener("click", function () {
+      var on = el.getAttribute("aria-pressed") === "true";
+      el.setAttribute("aria-pressed", on ? "false" : "true");
+      el.textContent = on ? "" : "✕";
+      if (on) store.del(el.id); else store.set(el.id, "1");
+      flashSaved();
+    });
+  });
+  // paint restored X marks
+  cells.forEach(function (el) { if (el.getAttribute("aria-pressed") === "true") el.textContent = "✕"; });
+
+  // Clear
+  // Two-click confirm (native confirm() is unreliable inside artifact viewers)
+  document.getElementById("clear-btn").addEventListener("click", function () {
+    if (this.dataset.armed !== "1") {
+      this.dataset.armed = "1";
+      var self = this; this.textContent = "Click again to clear everything";
+      setTimeout(function () { self.dataset.armed = "0"; self.textContent = "Clear my entries"; }, 3000);
+      return;
+    }
+    fields.forEach(function (el) { el.value = ""; store.del(el.id); });
+    cells.forEach(function (el) { el.setAttribute("aria-pressed", "false"); el.textContent = ""; store.del(el.id); });
+    flashSaved();
+    this.textContent = "Clear my entries"; this.dataset.armed = "0";
+  });
+
+  // Save & share: a working Print / Save-as-PDF button where printing works,
+  // a short note where it doesn't (the in-app artifact preview can't print).
+  var saveActions = document.getElementById("save-actions");
+  if (saveActions) {
+    if (window.__SHOW_PRINT__) {
+      var pb = document.createElement("button");
+      pb.className = "tool solid big"; pb.type = "button"; pb.textContent = "Print / Save as PDF";
+      pb.addEventListener("click", function () { window.print(); });
+      saveActions.appendChild(pb);
+    } else {
+      var note = document.createElement("p");
+      note.className = "hint-line";
+      note.textContent = "Open the downloadable kit file (or your Center's hosted copy) to print or save as PDF — this in-app preview can't print.";
+      saveActions.appendChild(note);
+    }
+  }
+
+  // Nav active-state via IntersectionObserver
+  var chips = {};
+  document.querySelectorAll("#chips a").forEach(function (a) { chips[a.getAttribute("href").slice(1)] = a; });
+  var acts = document.querySelectorAll(".activity");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var a = chips[en.target.id];
+        if (!a) return;
+        if (en.isIntersecting) {
+          Object.keys(chips).forEach(function (k) { chips[k].classList.remove("on"); });
+          a.classList.add("on");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    acts.forEach(function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Thinking Style Finder</title>
+<style>
+  /* Layout: single centered column; each question is a card of five rankable
+     options; results show a five-track bar panel. Five style hues carry meaning. */
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --ink: #1f2430;
+    --muted: #5c6475;
+    --line: #e3e1d9;
+    --accent: #2f6d6a;
+    --accent-soft: #e4efed;
+    --syn: #7c5cbf;   /* Synthesist */
+    --ide: #3a9d6a;   /* Idealist */
+    --pra: #e3a008;   /* Pragmatist */
+    --ana: #3d6fb4;   /* Analyst */
+    --rea: #d1495b;   /* Realist */
+    --shadow: 0 1px 2px rgba(31,36,48,.06), 0 8px 24px rgba(31,36,48,.06);
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+    --font-body: "Public Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15171c; --surface: #1e2129; --ink: #eceef2; --muted: #a2abbd;
+      --line: #2e323d; --accent: #5fb3af; --accent-soft: #223634;
+      --syn: #a98be0; --ide: #57c088; --pra: #f0b53a; --ana: #6fa0e0; --rea: #e86b7c;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.4);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #15171c; --surface: #1e2129; --ink: #eceef2; --muted: #a2abbd;
+    --line: #2e323d; --accent: #5fb3af; --accent-soft: #223634;
+    --syn: #a98be0; --ide: #57c088; --pra: #f0b53a; --ana: #6fa0e0; --rea: #e86b7c;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.4);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light; }
+  body {
+    margin: 0;
+    background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  .wrap {
+    max-width: 780px; margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 40px 72px;
+  }
+
+  header { margin-bottom: 24px; }
+  .eyebrow { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin: 0 0 10px; }
+  h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.05; letter-spacing: -.01em; text-wrap: balance; margin: 0 0 14px; }
+  .lede { color: var(--muted); font-size: 1.05rem; max-width: 62ch; margin: 0; }
+
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 22px; margin-top: 20px; }
+
+  label.name-field { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 6px; }
+  input[type="text"] { width: 100%; font: inherit; padding: 11px 13px; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--ink); }
+  input[type="text"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+  .how { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); font-size: .92rem; color: var(--muted); }
+  .how b { color: var(--ink); }
+  .how .ranks { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .how .ranks span { display: inline-flex; align-items: center; gap: 6px; font-size: .8rem; }
+  .pip { width: 24px; height: 24px; border-radius: 7px; border: 1px solid var(--line); display: inline-flex; align-items: center; justify-content: center; font-weight: 700; color: var(--ink); background: var(--bg); }
+  .pip.lo { border-color: var(--rea); color: var(--rea); }
+  .pip.hi { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .qcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 20px 20px 10px; margin-top: 18px; scroll-margin-top: 14px; }
+  .qcard.done { border-color: var(--accent); }
+  .q-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
+  .q-num { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 700; font-size: .85rem; letter-spacing: .04em; }
+  .q-badge { margin-left: auto; font-size: .75rem; font-weight: 700; color: var(--accent); opacity: 0; transition: opacity .15s; }
+  .qcard.done .q-badge { opacity: 1; }
+  .q-stem { font-family: var(--font-display); font-weight: 600; font-size: 1.12rem; margin: 0 0 14px; text-wrap: pretty; }
+
+  .opt { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px 16px; padding: 12px 0; border-top: 1px solid var(--line); }
+  .opt .otext { font-size: .98rem; min-width: 0; }
+  .rank-btns { display: inline-flex; gap: 5px; }
+  .rank-btns button { width: 36px; height: 36px; padding: 0; border: 1px solid var(--line); border-radius: 9px; background: var(--bg); color: var(--muted); font: inherit; font-weight: 700; cursor: pointer; transition: background .1s, color .1s, border-color .1s, transform .04s; }
+  .rank-btns button:hover { border-color: var(--accent); color: var(--ink); }
+  .rank-btns button:active { transform: translateY(1px); }
+  .rank-btns button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .rank-btns button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .bar { position: sticky; bottom: 0; margin-top: 24px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); padding: 14px 16px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .bar .prog { flex: 1 1 160px; min-width: 0; }
+  .bar .prog-track { height: 8px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .bar .prog-fill { height: 100%; width: 0; background: var(--accent); border-radius: 99px; transition: width .2s; }
+  .bar .prog-label { font-size: .82rem; color: var(--muted); margin-top: 6px; }
+  button.go { font: inherit; font-weight: 700; padding: 12px 22px; border: 0; border-radius: 10px; background: var(--accent); color: #fff; cursor: pointer; }
+  button.go:disabled { opacity: .45; cursor: not-allowed; }
+  button.ghost { font: inherit; font-weight: 700; padding: 12px 20px; border: 1px solid var(--line); border-radius: 10px; background: transparent; color: var(--accent); cursor: pointer; }
+
+  /* Results */
+  #results { scroll-margin-top: 20px; }
+  .result-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+  .result-head .primary-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; }
+  .tracks { display: grid; gap: 14px; margin: 20px 0 4px; }
+  .track-row { display: grid; grid-template-columns: 118px 1fr 52px; align-items: center; gap: 12px; }
+  .track-row .tname { font-weight: 700; font-size: .9rem; }
+  .track-bar { height: 14px; border-radius: 99px; background: var(--line); overflow: hidden; }
+  .track-bar i { display: block; height: 100%; border-radius: 99px; width: 0; transition: width .7s cubic-bezier(.2,.7,.2,1); }
+  .track-row .tval { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .t-syn { color: var(--syn); } .fill-syn { background: var(--syn); }
+  .t-ide { color: var(--ide); } .fill-ide { background: var(--ide); }
+  .t-pra { color: var(--pra); } .fill-pra { background: var(--pra); }
+  .t-ana { color: var(--ana); } .fill-ana { background: var(--ana); }
+  .t-rea { color: var(--rea); } .fill-rea { background: var(--rea); }
+
+  .style-detail { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .style-detail h3 { font-family: var(--font-display); font-size: 1.15rem; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; }
+  .style-detail h3 .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+  .style-detail .tagline { color: var(--muted); margin: 0 0 12px; font-size: .95rem; }
+  .style-detail h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 14px 0 6px; }
+  .style-detail ul { margin: 0; padding-left: 20px; }
+  .style-detail li { margin-bottom: 4px; }
+
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .toast { font-size: .85rem; color: var(--ide); font-weight: 700; align-self: center; }
+
+  footer { margin-top: 36px; color: var(--muted); font-size: .82rem; text-align: center; }
+
+  @media (max-width: 560px) {
+    .opt { grid-template-columns: 1fr; gap: 8px; }
+    .rank-btns { justify-content: space-between; width: 100%; }
+    .rank-btns button { flex: 1; }
+    .track-row { grid-template-columns: 100px 1fr 46px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  @media print {
+    .bar, .result-actions, input[type="text"], .how { display: none !important; }
+    .qcard, .card, #results { box-shadow: none; border-color: #ccc; break-inside: avoid; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;600;700&display=swap">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Team Thinking Workshop</p>
+    <h1>What's Your Thinking Style?</h1>
+    <p class="lede">People don't just communicate differently — they think differently. One teammate wants the big picture, another wants the facts, another wants to try something and see what works. This assessment maps how you approach ideas and problems across five thinking styles: Synthesist, Idealist, Pragmatist, Analyst, and Realist. It takes about ten minutes because you rank each set of answers, so give it some focus. Be honest — there are no right answers, and the ranking only works if it reflects how you actually think. Your result isn't a box you're stuck in; it's a starting point for noticing where you and a teammate see the same problem through very different lenses, and why that's a strength on a team, not a nuisance. Nothing is saved or sent.</p>
+  </header>
+
+  <div class="card">
+    <label class="name-field" for="student-name">Your name (optional — for your printout)</label>
+    <input type="text" id="student-name" placeholder="First, last" autocomplete="name">
+    <div class="how">
+      <b>How to rank:</b> tap a number for each response. Each number 1–5 is used once per question.
+      <div class="ranks">
+        <span><span class="pip lo">1</span> least like me</span>
+        <span><span class="pip">2</span></span>
+        <span><span class="pip">3</span></span>
+        <span><span class="pip">4</span></span>
+        <span><span class="pip hi">5</span> most like me</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="bar" role="region" aria-label="Progress">
+    <div class="prog">
+      <div class="prog-track"><div class="prog-fill" id="prog-fill"></div></div>
+      <div class="prog-label" id="prog-label">0 of 15 ranked</div>
+    </div>
+    <button id="submit-btn" class="go" type="button" disabled>See my style</button>
+  </div>
+
+  <section id="results" class="card" hidden aria-live="polite"></section>
+
+  <footer>
+    Original thinking-styles self-assessment on the five-style framework · For classroom and team use · Scoring key is editable in the source
+  </footer>
+</div>
+
+<script>
+window.__SHOW_PRINT__ = true;
+</script>
+<script>
+(function () {
+  "use strict";
+
+  // ---- Styles ------------------------------------------------------------
+  var STYLE = {
+    syn: { name: "Synthesist", cls: "syn", tagline: "Integrative, questioning, and energized by debate.",
+      traits: ["Looks for connections between opposing ideas", "Challenges assumptions and the obvious answer", "Enjoys 'what if' and speculation", "Comfortable with conflict and complexity"],
+      tips: ["Bring them a real debate, not a settled plan", "Expect — and value — their challenges", "Don't push for quick consensus", "Give room for big-picture speculation"] },
+    ide: { name: "Idealist", cls: "ide", tagline: "Big-picture, values-driven, and people-focused.",
+      traits: ["Starts from goals, purpose, and values", "Wants broad input and agreement", "Future-oriented and quality-focused", "Attentive to how people are affected"],
+      tips: ["Connect the task to a worthwhile purpose", "Include everyone's views early", "Give them the overall aim, not just steps", "Avoid pure cynicism — it shuts them down"] },
+    pra: { name: "Pragmatist", cls: "pra", tagline: "Adaptive, experimental, and focused on what works now.",
+      traits: ["Favors 'whatever works' over theory", "Works in quick, incremental steps", "Flexible and opportunistic", "Likes short-term, visible wins"],
+      tips: ["Let them pilot and iterate", "Focus on what works right now", "Don't over-plan before starting", "Celebrate quick wins"] },
+    ana: { name: "Analyst", cls: "ana", tagline: "Logical, methodical, and thorough.",
+      traits: ["Seeks the one best method", "Relies on data, theory, and careful analysis", "Values accuracy and consistency", "Plans before acting"],
+      tips: ["Give them detail, data, and context", "Be accurate — they will check", "Allow time to analyze", "Present a clear, logical plan"] },
+    rea: { name: "Realist", cls: "rea", tagline: "Concrete, factual, and results-driven.",
+      traits: ["Trusts facts and firsthand observation", "Focuses on resources and getting it done", "Impatient with abstraction", "Wants concrete, agreed-on results"],
+      tips: ["Be concrete and factual", "Focus on results and resources", "Be brief and direct", "Don't theorize endlessly"] }
+  };
+
+  // ---- Questions ---------------------------------------------------------
+  // Each option is keyed to one style (s). Every question uses all five once.
+  // Ranks (1 least, 5 most) are summed per style. Edit text or keys here.
+  var QUESTIONS = [
+    { stem: "When my team disagrees about an idea, I'm drawn to the view that:", opts: [
+      { t: "Surfaces the clash and asks what each side is really assuming.", s: "syn" },
+      { t: "Best reflects the group's shared goals and values.", s: "ide" },
+      { t: "Can be tried out quickly to see what actually works.", s: "pra" },
+      { t: "Is the most logical and internally consistent.", s: "ana" },
+      { t: "Is stated most plainly and backed by hard facts.", s: "rea" } ] },
+    { stem: "Starting a group project, the first thing I want to nail down is:", opts: [
+      { t: "The interesting tensions or trade-offs hidden in it.", s: "syn" },
+      { t: "Why the project matters and who it's meant to help.", s: "ide" },
+      { t: "A small first step we can take right now.", s: "pra" },
+      { t: "The method and plan we'll follow, step by step.", s: "ana" },
+      { t: "What resources we have and when it's due.", s: "rea" } ] },
+    { stem: "I take in a new idea best by:", opts: [
+      { t: "Contrasting it with ideas that disagree with it.", s: "syn" },
+      { t: "Seeing how it connects to a bigger picture.", s: "ide" },
+      { t: "Trying it out on a real situation.", s: "pra" },
+      { t: "Breaking it down and analyzing it carefully.", s: "ana" },
+      { t: "Relating it to concrete things I've seen work.", s: "rea" } ] },
+    { stem: "Charts and data in a report are most useful to me when they:", opts: [
+      { t: "Raise new questions or reveal a contradiction.", s: "syn" },
+      { t: "Support the overall point the author cares about.", s: "ide" },
+      { t: "Point to something I can act on.", s: "pra" },
+      { t: "Are explained and justified by a careful argument.", s: "ana" },
+      { t: "Lay out the key facts accurately and plainly.", s: "rea" } ] },
+    { stem: "Asked to lead a research project, I'd probably begin by:", opts: [
+      { t: "Imagining several very different possible outcomes.", s: "syn" },
+      { t: "Fitting it into a broader purpose.", s: "ide" },
+      { t: "Running a quick pilot to test the waters.", s: "pra" },
+      { t: "Defining the problem as precisely as I can.", s: "ana" },
+      { t: "Checking whether we have the facts and resources to pull it off.", s: "rea" } ] },
+    { stem: "To gather neighbors' views on a local issue, I'd rather:", opts: [
+      { t: "Interview small groups and probe where they disagree.", s: "syn" },
+      { t: "Hold an open meeting so everyone can share what matters to them.", s: "ide" },
+      { t: "Talk informally with a few key people to get moving.", s: "pra" },
+      { t: "Ask everyone to send me the relevant information first.", s: "ana" },
+      { t: "Ask each person specific, factual questions.", s: "rea" } ] },
+    { stem: "I tend to believe something is true if it:", opts: [
+      { t: "Has survived serious challenge and debate.", s: "syn" },
+      { t: "Fits with the other things I believe.", s: "ide" },
+      { t: "Has held up in actual practice.", s: "pra" },
+      { t: "Makes sense logically and scientifically.", s: "ana" },
+      { t: "Can be checked against observable facts.", s: "rea" } ] },
+    { stem: "In my free time, I'd most likely read about:", opts: [
+      { t: "A controversial or hotly debated issue.", s: "syn" },
+      { t: "How someone worked through a personal or social problem.", s: "ide" },
+      { t: "A clever, practical fix someone came up with.", s: "pra" },
+      { t: "A piece of scientific or historical research.", s: "ana" },
+      { t: "A true, firsthand account of something that happened.", s: "rea" } ] },
+    { stem: "Reading a report at work, I pay most attention to:", opts: [
+      { t: "The inferences drawn — and what's being assumed.", s: "syn" },
+      { t: "The writer's grasp of the real goals.", s: "ide" },
+      { t: "What I could put to use right away.", s: "pra" },
+      { t: "Whether the findings are valid and backed by data.", s: "ana" },
+      { t: "Whether the recommendations can actually be done.", s: "rea" } ] },
+    { stem: "Given a new task, the first thing I want to know is:", opts: [
+      { t: "How it connects to and affects everything else.", s: "syn" },
+      { t: "Why it's worth doing.", s: "ide" },
+      { t: "The quickest payoff from getting it started.", s: "pra" },
+      { t: "The best method for doing it well.", s: "ana" },
+      { t: "Who needs it and by when.", s: "rea" } ] },
+    { stem: "I learn to do something new best by:", opts: [
+      { t: "Hearing different people's take on how it's done.", s: "syn" },
+      { t: "Understanding how it relates to what I already know.", s: "ide" },
+      { t: "Jumping in and practicing as soon as possible.", s: "pra" },
+      { t: "Working out the single best way to do it.", s: "ana" },
+      { t: "Having someone show me, hands on.", s: "rea" } ] },
+    { stem: "If I had to be assessed, I'd prefer:", opts: [
+      { t: "A debate with others being assessed on the same thing.", s: "syn" },
+      { t: "A presentation of what I've learned and why it matters.", s: "ide" },
+      { t: "An informal account of how I've actually applied it.", s: "pra" },
+      { t: "A written report covering theory, method, and evidence.", s: "ana" },
+      { t: "A set of objective, problem-focused questions.", s: "rea" } ] },
+    { stem: "A theory is useful to me if it:", opts: [
+      { t: "Explains something in a surprising, new way.", s: "syn" },
+      { t: "Connects to other ideas I've learned.", s: "ide" },
+      { t: "Has a concrete application I can use now.", s: "pra" },
+      { t: "Systematically explains many related situations.", s: "ana" },
+      { t: "Matches what I've actually observed to be true.", s: "rea" } ] },
+    { stem: "People whose judgment I most respect tend to be:", opts: [
+      { t: "Philosophers and big-picture thinkers.", s: "syn" },
+      { t: "Teachers and writers.", s: "ide" },
+      { t: "Entrepreneurs and fixers.", s: "pra" },
+      { t: "Scientists and engineers.", s: "ana" },
+      { t: "Business and operational leaders.", s: "rea" } ] },
+    { stem: "Facing a tough problem, I'm most likely to first:", opts: [
+      { t: "Look for an angle that opposes the obvious one.", s: "syn" },
+      { t: "Step back and relate it to a larger aim.", s: "ide" },
+      { t: "Find a way to solve it quickly and move on.", s: "pra" },
+      { t: "Search for the single best procedure.", s: "ana" },
+      { t: "Look at how others have solved it before.", s: "rea" } ] }
+  ];
+
+  var TOTAL = QUESTIONS.length;
+  var MAXSCORE = TOTAL * 5, MINSCORE = TOTAL * 1;
+  var quiz = document.getElementById("quiz");
+  var answers = {}; // answers[qi] = { optIndex: rank }
+
+  QUESTIONS.forEach(function (q, qi) {
+    var card = document.createElement("div");
+    card.className = "qcard";
+    card.id = "q" + qi;
+
+    var head = document.createElement("div");
+    head.className = "q-head";
+    head.innerHTML = '<span class="q-num">Question ' + (qi + 1) + ' of ' + TOTAL + '</span>' +
+                     '<span class="q-badge">✓ ranked</span>';
+    card.appendChild(head);
+
+    var stem = document.createElement("p");
+    stem.className = "q-stem";
+    stem.textContent = q.stem;
+    card.appendChild(stem);
+
+    q.opts.forEach(function (opt, oi) {
+      var row = document.createElement("div");
+      row.className = "opt";
+      var txt = document.createElement("div");
+      txt.className = "otext";
+      txt.textContent = opt.t;
+      row.appendChild(txt);
+
+      var btns = document.createElement("div");
+      btns.className = "rank-btns";
+      btns.setAttribute("role", "group");
+      btns.setAttribute("aria-label", "Rank: " + opt.t);
+      for (var r = 1; r <= 5; r++) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = String(r);
+        b.setAttribute("aria-pressed", "false");
+        b.setAttribute("aria-label", "Rank " + r + (r === 1 ? " (least like me)" : r === 5 ? " (most like me)" : "") + " for: " + opt.t);
+        b.dataset.q = String(qi);
+        b.dataset.o = String(oi);
+        b.dataset.r = String(r);
+        btns.appendChild(b);
+      }
+      row.appendChild(btns);
+      card.appendChild(row);
+    });
+
+    quiz.appendChild(card);
+  });
+
+  var progFill = document.getElementById("prog-fill");
+  var progLabel = document.getElementById("prog-label");
+  var submitBtn = document.getElementById("submit-btn");
+
+  quiz.addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b || !b.dataset.r) return;
+    var qi = +b.dataset.q, oi = +b.dataset.o, r = +b.dataset.r;
+    setRank(qi, oi, r);
+  });
+
+  function setRank(qi, oi, r) {
+    var qa = answers[qi] || (answers[qi] = {});
+    if (qa[oi] === r) {
+      delete qa[oi];
+    } else {
+      Object.keys(qa).forEach(function (k) { if (qa[k] === r) delete qa[k]; });
+      qa[oi] = r;
+    }
+    renderQuestion(qi);
+    updateProgress();
+  }
+
+  function isComplete(qi) {
+    var qa = answers[qi];
+    return qa && Object.keys(qa).length === 5;
+  }
+
+  function renderQuestion(qi) {
+    var card = document.getElementById("q" + qi);
+    var qa = answers[qi] || {};
+    card.querySelectorAll("button[data-r]").forEach(function (b) {
+      var on = qa[+b.dataset.o] === +b.dataset.r;
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    card.classList.toggle("done", isComplete(qi));
+  }
+
+  function updateProgress() {
+    var n = 0;
+    for (var i = 0; i < TOTAL; i++) if (isComplete(i)) n++;
+    progFill.style.width = (n / TOTAL * 100) + "%";
+    progLabel.textContent = n + " of " + TOTAL + " ranked";
+    var all = n === TOTAL;
+    submitBtn.disabled = !all;
+    submitBtn.textContent = all ? "See my thinking style" : "Rank all " + TOTAL + " to see your style";
+  }
+
+  submitBtn.addEventListener("click", function () {
+    for (var i = 0; i < TOTAL; i++) {
+      if (!isComplete(i)) {
+        document.getElementById("q" + i).scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    }
+    showResults();
+  });
+
+  function showResults() {
+    var score = { syn: 0, ide: 0, pra: 0, ana: 0, rea: 0 };
+    QUESTIONS.forEach(function (q, qi) {
+      var qa = answers[qi];
+      q.opts.forEach(function (opt, oi) { score[opt.s] += (qa[oi] || 0); });
+    });
+
+    var order = Object.keys(STYLE).sort(function (a, b) { return score[b] - score[a]; });
+    var top = score[order[0]];
+    var primaries = order.filter(function (k) { return score[k] === top; });
+
+    var name = (document.getElementById("student-name").value || "").trim();
+    var res = document.getElementById("results");
+    var names = primaries.map(function (k) { return STYLE[k].name; }).join(" + ");
+
+    var html = "";
+    html += '<p class="eyebrow">Your result</p>';
+    html += '<div class="result-head">';
+    html += (name ? '<span style="color:var(--muted)">' + escapeHtml(name) + ' — </span>' : "");
+    html += '<span class="primary-name">' + names + '</span></div>';
+    html += '<p style="color:var(--muted);margin:0">' +
+      (primaries.length > 1
+        ? "You lead with a blend of styles — they scored equally for you."
+        : "This is your strongest style. Most people are a mix, so notice your next-strongest too.") + '</p>';
+
+    html += '<div class="tracks">';
+    order.forEach(function (k) {
+      var pct = Math.round((score[k] - MINSCORE) / (MAXSCORE - MINSCORE) * 100);
+      pct = Math.max(2, pct);
+      html += '<div class="track-row">' +
+        '<div class="tname t-' + STYLE[k].cls + '">' + STYLE[k].name + '</div>' +
+        '<div class="track-bar"><i class="fill-' + STYLE[k].cls + '" data-w="' + pct + '"></i></div>' +
+        '<div class="tval">' + score[k] + '</div></div>';
+    });
+    html += '</div>';
+
+    primaries.forEach(function (k) {
+      var s = STYLE[k];
+      html += '<div class="style-detail">';
+      html += '<h3><span class="swatch fill-' + s.cls + '"></span>' + s.name + '</h3>';
+      html += '<p class="tagline">' + s.tagline + '</p>';
+      html += '<h4>What this looks like</h4><ul>';
+      s.traits.forEach(function (t) { html += '<li>' + t + '</li>'; });
+      html += '</ul><h4>How teammates can work with you</h4><ul>';
+      s.tips.forEach(function (t) { html += '<li>' + t + '</li>'; });
+      html += '</ul></div>';
+    });
+
+    html += '<div class="result-actions">' +
+      '<button type="button" class="go" id="copy-btn">Copy my results</button>' +
+      '<button type="button" class="ghost" id="retake-btn">Start over</button>' +
+      (window.__SHOW_PRINT__ ? '<button type="button" class="ghost" id="print-btn">Print / Save PDF</button>' : '') +
+      '<span class="toast" id="copy-toast" hidden>Copied — paste it anywhere</span></div>';
+
+    res.innerHTML = html;
+    res.hidden = false;
+    requestAnimationFrame(function () {
+      res.querySelectorAll(".track-bar i").forEach(function (el) { el.style.width = el.dataset.w + "%"; });
+    });
+    res.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    document.getElementById("retake-btn").addEventListener("click", function () {
+      answers = {};
+      QUESTIONS.forEach(function (q, qi) { renderQuestion(qi); });
+      res.hidden = true;
+      updateProgress();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    var printBtn = document.getElementById("print-btn");
+    if (printBtn) printBtn.addEventListener("click", function () { window.print(); });
+
+    document.getElementById("copy-btn").addEventListener("click", function () {
+      var lines = [];
+      if (name) lines.push(name);
+      lines.push("Thinking style: " + names);
+      lines.push("");
+      order.forEach(function (k) { lines.push(STYLE[k].name + ": " + score[k] + "/" + MAXSCORE); });
+      copyText(lines.join("\n"), document.getElementById("copy-toast"));
+    });
+  }
+
+  function copyText(text, toast) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { flash(toast); }).catch(function () { fallback(text, toast); });
+    } else { fallback(text, toast); }
+  }
+  function flash(toast) { toast.hidden = false; setTimeout(function () { toast.hidden = true; }, 2600); }
+  function fallback(text, toast) {
+    var ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand("copy"); flash(toast); } catch (e) { toast.textContent = "Select and copy manually"; toast.hidden = false; }
+    document.body.removeChild(ta);
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; });
+  }
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>
