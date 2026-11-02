@@ -289,7 +289,7 @@ sass:
 # -----------------------------------------------------------------------------
 
 jekyll-minifier:
-  exclude: ["robots.txt", "assets/js/search/*.js", "assets/libs/**/*", "launch-kit/**/*"]
+  exclude: ["robots.txt", "assets/js/search/*.js", "assets/libs/**/*", "launch-kit/**/*", "nccu-campus-preview/**/*"]
   uglifier_args:
     harmony: true
 
