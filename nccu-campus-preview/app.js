@@ -23,7 +23,7 @@
  let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
  for(const obj of meta.objects.filter(o=>o.place_id))for(let c=0;c<8;c++){const p=[0,1,2].map(k=>(c&(1<<k))?obj.bbox_max[k]:obj.bbox_min[k]);const d=sub(p,home),x=dot(d,right),y=dot(d,up);minX=Math.min(minX,x);maxX=Math.max(maxX,x);minY=Math.min(minY,y);maxY=Math.max(maxY,y);}
  const homeOffset=[(minX+maxX)/2,(minY+maxY)/2];let panX=homeOffset[0],panY=homeOffset[1],zoom=1,showTrees=true,showNeighborhood=true,selected=0,halfW,halfH,pickDirty=true,ready=false,lastQA=null;
- const reviewView=new URLSearchParams(location.search).get('view')?.split(',').map(Number);if(reviewView?.length===3&&reviewView.every(Number.isFinite)){panX=reviewView[0];panY=reviewView[1];zoom=Math.max(.7,Math.min(10,reviewView[2]));}
+ const reviewParam=new URLSearchParams(location.search).get('view');const reviewView=reviewParam?reviewParam.split(',').map(Number):null;if(reviewView&&reviewView.length===3&&reviewView.every(Number.isFinite)){panX=reviewView[0];panY=reviewView[1];zoom=Math.max(.7,Math.min(10,reviewView[2]));}
  $('review').onclick=()=>$('reviewNotes').showModal();$('closeReview').onclick=()=>$('reviewNotes').close();
  const places=new Map(meta.places.map(p=>[p.pick_id,p]));const pickFBO=gl.createFramebuffer(),tex=gl.createTexture(),depth=gl.createRenderbuffer();
  gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);gl.disable(gl.DITHER);
